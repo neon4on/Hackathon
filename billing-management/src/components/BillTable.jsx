@@ -9,9 +9,10 @@ const BillTable = () => {
     const fetchBills = async () => {
       try {
         const response = await axios.get('/api/bills');
-        setBills(response.data);
+        setBills(response.data || []);
       } catch (error) {
         console.error('Error fetching bills:', error);
+        setBills([]);
       }
     };
     fetchBills();
@@ -28,13 +29,14 @@ const BillTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {bills.map((bill) => (
-            <TableRow key={bill.id}>
-              <TableCell>{bill.id}</TableCell>
-              <TableCell>{bill.date}</TableCell>
-              <TableCell>{bill.amount}</TableCell>
-            </TableRow>
-          ))}
+          {Array.isArray(bills) &&
+            bills.map((bill) => (
+              <TableRow key={bill.id}>
+                <TableCell>{bill.id}</TableCell>
+                <TableCell>{bill.date}</TableCell>
+                <TableCell>{bill.amount}</TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </Paper>

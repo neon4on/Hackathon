@@ -1,5 +1,6 @@
 const sequelize = require('../config/database');
 const Bill = require('./bill');
+const DistributionObject = require('./distributionObject');
 
 const initDb = async () => {
   try {
@@ -10,4 +11,4 @@ const initDb = async () => {
   }
 };
 
-module.exports = { Bill, initDb };
+module.exports = { Bill, DistributionObject, initDb };

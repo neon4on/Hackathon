@@ -10,9 +10,13 @@ app.use(express.json());
 
 const billsRouter = require('./routes/bills');
 const distributeRouter = require('./routes/distribute');
+const forecastRouter = require('./routes/forecast');
+const distributionObjectsRouter = require('./routes/distributionObjects');
 
 app.use('/api/bills', billsRouter);
 app.use('/api/distribute', distributeRouter);
+app.use('/api/forecast', forecastRouter);
+app.use('/api/distribution-objects', distributionObjectsRouter);
 
 initDb();
 

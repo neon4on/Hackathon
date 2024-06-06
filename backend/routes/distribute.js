@@ -1,11 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { distributeBills } = require('../controllers/distributionController');
 
-// Добавьте контроллеры для распределения счетов
-
-router.post('/', (req, res) => {
-  // Логика распределения счетов
-  res.json({ message: 'Распределение выполнено' });
-});
+router.post('/', distributeBills);
 
 module.exports = router;

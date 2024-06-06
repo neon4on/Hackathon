@@ -7,5 +7,8 @@ const api = axios.create({
 export const fetchBills = () => api.get('/bills');
 export const createBill = (bill) => api.post('/bills', bill);
 export const distributeBills = () => api.post('/distribute');
+export const fetchForecast = () => api.get('/forecast');
+export const fetchDistributionObjects = () => api.get('/distribution-objects');
+export const createDistributionObject = (object) => api.post('/distribution-objects', object);
 
 export default api;

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Button, TextField, Container, Typography } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { createBill } from '../api/api';
 
 const CreateBill = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [date, setDate] = useState('');
   const [amount, setAmount] = useState('');
 
@@ -11,10 +13,11 @@ const CreateBill = () => {
     const bill = { date, amount };
     try {
       await createBill(bill);
-      // Очистить поля ввода после успешного создания
       setDate('');
       setAmount('');
+      enqueueSnackbar('Bill created successfully!', { variant: 'success' });
     } catch (error) {
+      enqueueSnackbar('Error creating bill.', { variant: 'error' });
       console.error('Error creating bill:', error);
     }
   };
