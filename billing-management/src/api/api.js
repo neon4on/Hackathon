@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Замените на URL вашего сервера
+  baseURL: 'http://localhost:5000/api',
 });
 
 export const fetchBills = () => api.get('/bills');
@@ -10,5 +10,8 @@ export const distributeBills = () => api.post('/distribute');
 export const fetchForecast = () => api.get('/forecast');
 export const fetchDistributionObjects = () => api.get('/distribution-objects');
 export const createDistributionObject = (object) => api.post('/distribution-objects', object);
+export const updateDistributionObject = (id, object) =>
+  api.put(`/distribution-objects/${id}`, object);
+export const deleteDistributionObject = (id) => api.delete(`/distribution-objects/${id}`);
 
 export default api;

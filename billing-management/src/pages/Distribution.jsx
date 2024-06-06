@@ -31,7 +31,7 @@ const Distribution = () => {
         Distribution
       </Typography>
       <Button variant="contained" color="primary" onClick={handleDistribute}>
-        Запуск распределения
+        Start Distribution
       </Button>
       {distributedBills.length > 0 && (
         <>
@@ -43,6 +43,7 @@ const Distribution = () => {
                   <TableCell>Date</TableCell>
                   <TableCell>Amount</TableCell>
                   <TableCell>Distributed Amount</TableCell>
+                  <TableCell>Object ID</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -52,6 +53,7 @@ const Distribution = () => {
                     <TableCell>{bill.date}</TableCell>
                     <TableCell>{bill.amount}</TableCell>
                     <TableCell>{bill.distributedAmount}</TableCell>
+                    <TableCell>{bill.objectId}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

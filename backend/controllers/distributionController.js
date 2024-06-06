@@ -1,24 +1,25 @@
-const { Bill } = require('../models');
+const { Bill, DistributionObject } = require('../models');
 const { Op } = require('sequelize');
 
 const distributeBills = async (req, res) => {
   try {
-    // Логика распределения счетов
-    // Пример: распределение суммы по определенным критериям
-
     const bills = await Bill.findAll();
+    const objects = await DistributionObject.findAll();
 
-    // Пример логики распределения
     const distributedBills = bills.map((bill) => {
       // Логика распределения
-      // Например, распределение по зданиям
-      return {
+      // Например, распределение по площади зданий и категориям услуг
+      const totalArea = objects.reduce((sum, obj) => sum + obj.area, 0);
+      const distributedAmount = objects.map((obj) => ({
         ...bill.dataValues,
-        distributedAmount: bill.amount * 0.5, // Пример расчета распределенной суммы
-      };
+        distributedAmount: (bill.amount * obj.area) / totalArea,
+        objectId: obj.id,
+      }));
+
+      return distributedAmount;
     });
 
-    res.json(distributedBills);
+    res.json(distributedBills.flat());
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

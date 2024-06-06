@@ -1,40 +1,33 @@
-const { Bill } = require('../models');
 const { spawn } = require('child_process');
 const path = require('path');
 
-const forecastCosts = async (req, res) => {
-  try {
-    const bills = await Bill.findAll();
+const forecastCosts = (req, res) => {
+  const scriptPath = path.join(__dirname, '../machine_learning/predict.py');
+  const pythonProcess = spawn('python', [scriptPath]);
 
-    const data = bills.map((bill) => ({
-      date: bill.date,
-      amount: bill.amount,
-    }));
+  pythonProcess.stdout.on('data', (data) => {
+    const result = data.toString();
+    res.json(JSON.parse(result));
+  });
 
-    const scriptPath = path.join(__dirname, '../machine_learning/forecast.py');
-    const pythonProcess = spawn('python', [scriptPath]);
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+  });
 
-    let result = '';
-    pythonProcess.stdout.on('data', (data) => {
-      result += data.toString();
-    });
+  pythonProcess.on('close', (code) => {
+    if (code !== 0) {
+      res.status(500).json({ message: 'Error during forecast calculation' });
+    }
+  });
 
-    pythonProcess.stderr.on('data', (data) => {
-      console.error(`stderr: ${data}`);
-    });
+  const futureDates = JSON.stringify([
+    { date: '2023-01-01' },
+    { date: '2023-02-01' },
+    { date: '2023-03-01' },
+  ]);
 
-    pythonProcess.on('close', (code) => {
-      if (code !== 0) {
-        return res.status(500).json({ message: 'Error during forecast calculation' });
-      }
-      res.json(JSON.parse(result));
-    });
-
-    pythonProcess.stdin.write(JSON.stringify(data));
-    pythonProcess.stdin.end();
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+  pythonProcess.stdin.write(futureDates);
+  pythonProcess.stdin.end();
 };
 
 module.exports = {

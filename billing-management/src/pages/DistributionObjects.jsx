@@ -10,14 +10,23 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  IconButton,
 } from '@mui/material';
-import { fetchDistributionObjects, createDistributionObject } from '../api/api';
+import {
+  fetchDistributionObjects,
+  createDistributionObject,
+  updateDistributionObject,
+  deleteDistributionObject,
+} from '../api/api';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const DistributionObjects = () => {
   const [objects, setObjects] = useState([]);
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [area, setArea] = useState('');
+  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     const getObjects = async () => {
@@ -35,14 +44,36 @@ const DistributionObjects = () => {
     e.preventDefault();
     const newObject = { name, type, area };
     try {
-      await createDistributionObject(newObject);
+      if (editId) {
+        await updateDistributionObject(editId, newObject);
+        setEditId(null);
+      } else {
+        await createDistributionObject(newObject);
+      }
       setName('');
       setType('');
       setArea('');
       const response = await fetchDistributionObjects();
       setObjects(response.data);
     } catch (error) {
-      console.error('Error creating distribution object:', error);
+      console.error('Error creating/updating distribution object:', error);
+    }
+  };
+
+  const handleEdit = (object) => {
+    setName(object.name);
+    setType(object.type);
+    setArea(object.area);
+    setEditId(object.id);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteDistributionObject(id);
+      const response = await fetchDistributionObjects();
+      setObjects(response.data);
+    } catch (error) {
+      console.error('Error deleting distribution object:', error);
     }
   };
 
@@ -74,7 +105,7 @@ const DistributionObjects = () => {
           margin="normal"
         />
         <Button variant="contained" color="primary" type="submit">
-          Create
+          {editId ? 'Update' : 'Create'}
         </Button>
       </form>
       {objects.length > 0 && (
@@ -86,6 +117,7 @@ const DistributionObjects = () => {
                 <TableCell>Name</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Area</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -95,6 +127,14 @@ const DistributionObjects = () => {
                   <TableCell>{object.name}</TableCell>
                   <TableCell>{object.type}</TableCell>
                   <TableCell>{object.area}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleEdit(object)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleDelete(object.id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
