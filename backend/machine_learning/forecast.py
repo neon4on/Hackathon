@@ -1,15 +1,13 @@
 import pandas as pd
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
+from data_preparation import load_data, prepare_data
 import os
 
 def train_model(data):
-    df = pd.DataFrame(data)
-    df['date'] = pd.to_datetime(df['date'])
-    df['month'] = df['date'].dt.month
-    df['year'] = df['date'].dt.year
+    df = prepare_data(data)
     X = df[['month', 'year']]
-    y = df['amount']
+    y = df['Стоимость без НДС']
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -20,20 +18,15 @@ def train_model(data):
         tf.keras.layers.Dense(1)
     ])
 
-    model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+    model.compile(optimizer=tf.keras.optimizers.Adam(), loss='mean_squared_error', metrics=['mae'])
 
     model.fit(X_train, y_train, epochs=10, validation_split=0.2)
 
     return model
 
 if __name__ == "__main__":
-    # Пример использования
-    data = {
-        'date': ['2022-01-01', '2022-02-01', '2022-03-01'],
-        'amount': [1000, 1500, 1200]
-    }
-
+    data = load_data()
     model = train_model(data)
-    model_save_path = './forecast_model.h5'
+    model_save_path = os.path.join(os.path.dirname(__file__), '../data/forecast_model.h5')
     model.save(model_save_path)
     print(f"Model saved at {model_save_path}")

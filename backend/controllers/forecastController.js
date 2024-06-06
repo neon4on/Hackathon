@@ -7,7 +7,12 @@ const forecastCosts = (req, res) => {
 
   pythonProcess.stdout.on('data', (data) => {
     const result = data.toString();
-    res.json(JSON.parse(result));
+    try {
+      res.json(JSON.parse(result));
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+      res.status(500).json({ message: 'Error during forecast calculation' });
+    }
   });
 
   pythonProcess.stderr.on('data', (data) => {

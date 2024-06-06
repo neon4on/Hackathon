@@ -1,52 +1,53 @@
 import pandas as pd
-from odf.opendocument import load
-from odf.table import Table, TableRow, TableCell
-from odf.text import P
+import os
 
-def load_ods(file_path):
-    doc = load(file_path)
-    sheets = {}
-    for sheet in doc.spreadsheet.getElementsByType(Table):
-        rows = []
-        for row in sheet.getElementsByType(TableRow):
-            cells = []
-            for cell in row.getElementsByType(TableCell):
-                text = ''.join([node.nodeValue for node in cell.childNodes if node.nodeValue])
-                cells.append(text)
-            rows.append(cells)
-        sheets[sheet.getAttribute("name")] = pd.DataFrame(rows[1:], columns=rows[0])
-    return sheets
+# Определение пути до директории с данными
+data_dir = os.path.join(os.path.dirname(__file__), '../data')
 
-# Загрузка данных из ODS файлов
+# Загрузка данных из XLSX файлов
 def load_data():
-    distributed_bills_sheets = load_ods('/mnt/data/Распределенные счета на оплату 3800-2023.ods')
-    service_codes_sheets = load_ods('/mnt/data/Коды услуг.ods')
-    assets_sheets = load_ods('/mnt/data/Основные средства.ods')
-    building_areas_sheets = load_ods('/mnt/data/Площади зданий.ods')
-    contracts_sheets = load_ods('/mnt/data/Договоры.ods')
-    bills_sheets = load_ods('/mnt/data/Счета на оплату 3800-2023.ods')
-    contract_building_link_sheets = load_ods('/mnt/data/Связь договор - здания.ods')
-
-    # Пример: Использование первого листа из каждого файла
-    distributed_bills = distributed_bills_sheets[list(distributed_bills_sheets.keys())[0]]
-    service_codes = service_codes_sheets[list(service_codes_sheets.keys())[0]]
-    assets = assets_sheets[list(assets_sheets.keys())[0]]
-    building_areas = building_areas_sheets[list(building_areas_sheets.keys())[0]]
-    contracts = contracts_sheets[list(contracts_sheets.keys())[0]]
-    bills = bills_sheets[list(bills_sheets.keys())[0]]
-    contract_building_link = contract_building_link_sheets[list(contract_building_link_sheets.keys())[0]]
+    distributed_bills = pd.read_excel(os.path.join(data_dir, 'Распределенные_счета_на_оплату_3800_2023.xlsx'))
+    contracts = pd.read_excel(os.path.join(data_dir, 'Договоры.xlsx'))
+    service_codes = pd.read_excel(os.path.join(data_dir, 'Коды услуг.xlsx'))
+    assets = pd.read_excel(os.path.join(data_dir, 'Основные средства.xlsx'))
+    building_areas = pd.read_excel(os.path.join(data_dir, 'Площади зданий.xlsx'))
+    bills = pd.read_excel(os.path.join(data_dir, 'Счета на оплату 3800-2023.xlsx'))
+    contract_building_link = pd.read_excel(os.path.join(data_dir, 'Связь договор - здания.xlsx'))
 
     return {
         'distributed_bills': distributed_bills,
+        'contracts': contracts,
         'service_codes': service_codes,
         'assets': assets,
         'building_areas': building_areas,
-        'contracts': contracts,
         'bills': bills,
         'contract_building_link': contract_building_link
     }
 
+def prepare_data(data):
+    # Пример: объединение данных для дальнейшего использования
+    bills = data['bills']
+    service_codes = data['service_codes']
+    
+    # Проверка наличия столбцов
+    print("Bills columns:", bills.columns)
+    print("Service codes columns:", service_codes.columns)
+    
+    # Объединение счетов и кодов услуг по ID услуги
+    merged_data = pd.merge(bills, service_codes, how='left', left_on='ID услуги', right_on='ID услуги')
+    
+    # Проверка наличия столбцов после слияния
+    print("Merged data columns:", merged_data.columns)
+    
+    # Пример: преобразование даты в год и месяц
+    date_column = 'Дата отражения счета в учетной системе'  # Убедитесь, что это правильное имя столбца
+    merged_data[date_column] = pd.to_datetime(merged_data[date_column])
+    merged_data['year'] = merged_data[date_column].dt.year
+    merged_data['month'] = merged_data[date_column].dt.month
+
+    return merged_data
+
 if __name__ == "__main__":
     data = load_data()
-    for key, df in data.items():
-        print(f"{key}:\n", df.head())
+    prepared_data = prepare_data(data)
+    print(prepared_data.head())

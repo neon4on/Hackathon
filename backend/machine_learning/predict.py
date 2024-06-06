@@ -2,6 +2,7 @@ import pandas as pd
 import tensorflow as tf
 import sys
 import json
+import os
 
 def forecast_costs(model, future_dates):
     future_dates['date'] = pd.to_datetime(future_dates['date'])
@@ -18,6 +19,8 @@ if __name__ == "__main__":
     future_dates = json.loads(sys.stdin.read())
     future_dates = pd.DataFrame(future_dates)
     
-    model = tf.keras.models.load_model('./forecast_model.h5')
+    model_path = os.path.join(os.path.dirname(__file__), '../data/forecast_model.h5')
+    model = tf.keras.models.load_model(model_path, custom_objects={'Adam': tf.keras.optimizers.Adam})
     forecast = forecast_costs(model, future_dates)
-    print(forecast.to_json(orient='records'))
+    forecast_json = forecast.to_json(orient='records', force_ascii=False)
+    print(forecast_json.encode('utf-8').decode('utf-8'))

@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'http://localhost:3000/api',
 });
+
+const API_URL = 'http://localhost:3000';
 
 export const fetchBills = () => api.get('/bills');
 export const createBill = (bill) => api.post('/bills', bill);

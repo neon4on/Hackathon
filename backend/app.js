@@ -1,25 +1,28 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-const { initDb } = require('./models');
+
+// Импорт маршрутов
+const billsRoute = require('./routes/bills');
+const distributeRoute = require('./routes/distribute');
+const forecastRoute = require('./routes/forecast');
+const distributionObjectsRoute = require('./routes/distributionObjects');
 
 const app = express();
-const port = 5000;
 
+// Middleware
+app.use(bodyParser.json());
 app.use(cors());
-app.use(express.json());
 
-const billsRouter = require('./routes/bills');
-const distributeRouter = require('./routes/distribute');
-const forecastRouter = require('./routes/forecast');
-const distributionObjectsRouter = require('./routes/distributionObjects');
+// Использование маршрутов
+app.use('/api/bills', billsRoute);
+app.use('/api/distribute', distributeRoute);
+app.use('/api/forecast', forecastRoute);
+app.use('/api/distribution-objects', distributionObjectsRoute);
 
-app.use('/api/bills', billsRouter);
-app.use('/api/distribute', distributeRouter);
-app.use('/api/forecast', forecastRouter);
-app.use('/api/distribution-objects', distributionObjectsRouter);
-
-initDb();
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = app;
