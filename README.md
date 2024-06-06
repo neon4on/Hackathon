@@ -1,16 +1,16 @@
-#Task 11 Moskow Hackathon
+# Task 11 Moskow Hackathon
 
-#Install Project:
+# Install Project:
 
-1.  pip install -r backend/machine_learning/requirements.txt
+1.      pip install -r backend/machine_learning/requirements.txt
 
-2.  cd backend
-    npm i
+2.      cd backend
+3.      npm i
 
-3.  cd billing-management
-    npm i
+4.      cd billing-management
+5.      npm i
 
-#Run Project:
+# Run Project:
 
 1.  cd backend
     node app.js
@@ -18,7 +18,8 @@
 2.  cd billing-management
     npm run dev
 
-#Postman managment:
+# Postman managment:
+
 POST http://localhost:5000/api/bills
 Body raw
 {
@@ -28,11 +29,14 @@ Body raw
 "updatedAt": "2024-06-06T08:48:51.780Z",
 "createdAt": "2024-06-06T08:48:51.780Z"
 }
+
 GET http://localhost:5000/api/bills
+
 POST http://localhost:5000/api/distribute
+
 GET http://localhost:5000/api/forecast
 
-Desctiption:
+# Desctiption:
 
 1. Home.jsx
    Описание: Главная страница приложения. Здесь может быть размещена общая информация о приложении и его функциональности.
