@@ -18,6 +18,7 @@ const Forecast = () => {
     const getForecast = async () => {
       try {
         const response = await fetchForecast();
+        console.log('Fetched forecast:', response.data); // Debugging line
         setForecast(response.data);
       } catch (error) {
         console.error('Error fetching forecast:', error);
@@ -31,7 +32,7 @@ const Forecast = () => {
       <Typography variant="h4" gutterBottom>
         Forecast
       </Typography>
-      {forecast.length > 0 && (
+      {forecast.length > 0 ? (
         <Paper style={{ padding: '16px' }}>
           <Table>
             <TableHead>
@@ -44,12 +45,14 @@ const Forecast = () => {
               {forecast.map((item, index) => (
                 <TableRow key={index}>
                   <TableCell>{item.date}</TableCell>
-                  <TableCell>{item.predicted_amount.toFixed(2)}</TableCell>
+                  <TableCell>{item.predicted_amount?.toFixed(2)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </Paper>
+      ) : (
+        <Typography>No forecast data found</Typography>
       )}
     </Container>
   );

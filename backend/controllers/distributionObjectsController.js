@@ -1,59 +1,47 @@
 const { DistributionObject } = require('../models');
 
-const getDistributionObjects = async (req, res) => {
+exports.getDistributionObjects = async (req, res) => {
   try {
     const objects = await DistributionObject.findAll();
     res.json(objects);
   } catch (error) {
-    console.error('Error fetching distribution objects:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).send(error.message);
   }
 };
 
-const createDistributionObject = async (req, res) => {
+exports.createDistributionObject = async (req, res) => {
   try {
     const object = await DistributionObject.create(req.body);
-    res.status(201).json(object);
+    res.json(object);
   } catch (error) {
-    console.error('Error creating distribution object:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).send(error.message);
   }
 };
 
-const updateDistributionObject = async (req, res) => {
+exports.updateDistributionObject = async (req, res) => {
   try {
     const { id } = req.params;
-    const [updated] = await DistributionObject.update(req.body, { where: { id } });
-    if (updated) {
-      const updatedObject = await DistributionObject.findOne({ where: { id } });
-      res.json(updatedObject);
-    } else {
-      res.status(404).json({ message: 'Distribution object not found' });
+    const object = await DistributionObject.findByPk(id);
+    if (!object) {
+      return res.status(404).send('Distribution object not found');
     }
+    await object.update(req.body);
+    res.json(object);
   } catch (error) {
-    console.error('Error updating distribution object:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).send(error.message);
   }
 };
 
-const deleteDistributionObject = async (req, res) => {
+exports.deleteDistributionObject = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = await DistributionObject.destroy({ where: { id } });
-    if (deleted) {
-      res.status(204).send();
-    } else {
-      res.status(404).json({ message: 'Distribution object not found' });
+    const object = await DistributionObject.findByPk(id);
+    if (!object) {
+      return res.status(404).send('Distribution object not found');
     }
+    await object.destroy();
+    res.send('Distribution object deleted');
   } catch (error) {
-    console.error('Error deleting distribution object:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).send(error.message);
   }
-};
-
-module.exports = {
-  getDistributionObjects,
-  createDistributionObject,
-  updateDistributionObject,
-  deleteDistributionObject,
 };

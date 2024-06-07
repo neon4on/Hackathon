@@ -16,4 +16,6 @@ export const updateDistributionObject = (id, object) =>
   api.put(`/distribution-objects/${id}`, object);
 export const deleteDistributionObject = (id) => api.delete(`/distribution-objects/${id}`);
 
+export const processML = () => api.post('/ml');
+
 export default api;

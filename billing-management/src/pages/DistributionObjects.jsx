@@ -21,7 +21,12 @@ const DistributionObjects = () => {
     const getObjects = async () => {
       try {
         const response = await fetchDistributionObjects();
-        setObjects(response.data);
+        console.log('Fetched distribution objects:', response.data); // Debugging line
+        if (Array.isArray(response.data)) {
+          setObjects(response.data);
+        } else {
+          console.error('Expected an array but received:', response.data);
+        }
       } catch (error) {
         console.error('Error fetching distribution objects:', error);
       }
@@ -43,7 +48,7 @@ const DistributionObjects = () => {
       <Typography variant="h4" gutterBottom>
         Distribution Objects
       </Typography>
-      {objects.length > 0 && (
+      {objects.length > 0 ? (
         <Paper style={{ padding: '16px' }}>
           <Table>
             <TableHead>
@@ -71,6 +76,8 @@ const DistributionObjects = () => {
             </TableBody>
           </Table>
         </Paper>
+      ) : (
+        <Typography>No distribution objects found</Typography>
       )}
     </Container>
   );

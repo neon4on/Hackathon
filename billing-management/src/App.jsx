@@ -9,6 +9,7 @@ import Distribution from './pages/Distribution';
 import Forecast from './pages/Forecast';
 import CreateBill from './components/CreateBill';
 import DistributionObjects from './pages/DistributionObjects';
+import MLComponent from './components/MLComponent';
 
 const App = () => {
   return (
@@ -16,9 +17,10 @@ const App = () => {
       <Router>
         <Header />
         <div style={{ display: 'flex' }}>
-          <Sidebar />
+          {/* <Sidebar /> */}
           <main style={{ flexGrow: 1, padding: '1rem' }}>
             <Routes>
+              <Route path="/ml" element={<MLComponent />} />
               <Route path="/" element={<Home />} />
               <Route path="/bills" element={<Bills />} />
               <Route path="/distribution" element={<Distribution />} />

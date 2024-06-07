@@ -1,14 +1,35 @@
+const Sequelize = require('sequelize');
 const sequelize = require('../config/database');
-const Bill = require('./bill');
-const DistributionObject = require('./distributionObject');
 
-const initDb = async () => {
-  try {
-    await sequelize.sync({ force: true });
-    console.log('Database synchronized');
-  } catch (error) {
-    console.error('Unable to sync database:', error);
-  }
+const Bill = sequelize.define('Bill', {
+  date: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  amount: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+  },
+});
+
+const DistributionObject = sequelize.define('DistributionObject', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  type: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  area: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+  },
+});
+
+sequelize.sync();
+
+module.exports = {
+  Bill,
+  DistributionObject,
 };
-
-module.exports = { Bill, DistributionObject, initDb };
