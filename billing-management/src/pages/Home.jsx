@@ -1,13 +1,22 @@
 import React from 'react';
-import { Container, Typography } from '@mui/material';
+import HeaderLend from '../components/HeaderLend';
+import MainSection from '../components/MainSection';
+import RegistrationForm from '../components/RegistrationForm';
+import LoginForm from '../components/LoginForm';
+import Footer from '../components/Footer';
+import styles from '../styles/Home.module.css';
 
 const Home = () => {
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Welcome to the Billing Management System
-      </Typography>
-    </Container>
+    <div>
+      <HeaderLend />
+      <MainSection />
+      <div className={styles.forms}>
+        <RegistrationForm />
+        <LoginForm />
+      </div>
+      <Footer />
+    </div>
   );
 };
 
