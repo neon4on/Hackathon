@@ -1,13 +1,10 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@mui/material';
 
 const Header = () => {
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6">Billing Management System</Typography>
-      </Toolbar>
-    </AppBar>
+    <nav>
+      <h1>Billing Management System</h1>
+    </nav>
   );
 };
 

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import{ useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@mui/material';
 
 const BillTable = () => {
   const [bills, setBills] = useState([]);
@@ -19,28 +18,26 @@ const BillTable = () => {
   }, []);
 
   return (
-    <Paper>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {Array.isArray(bills) &&
-            bills.map((bill) => (
-              <TableRow key={bill.id}>
-                <TableCell>{bill.id}</TableCell>
-                <TableCell>{bill.date}</TableCell>
-                <TableCell>{bill.amount}</TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+    <table>
+      <thead>
+        <th>
+          <td>ID</td>
+          <td>Дата</td>
+          <td>Количество</td>
+        </th>
+      </thead>
+      <tbody>
+        {Array.isArray(bills) &&
+          bills.map((bill) => (
+            <tr key={bill.id}>
+              <td>{bill.id}</td>
+              <td>{bill.date}</td>
+              <td>{bill.amount}</td>
+            </tr>
+        ))}
+      </tbody>
+  </table>
+  );  
 };
 
 export default BillTable;

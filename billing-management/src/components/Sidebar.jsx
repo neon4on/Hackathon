@@ -1,31 +1,28 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Drawer } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <Drawer variant="permanent">
-      <List>
-        <ListItem button component={Link} to="/">
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button component={Link} to="/bills">
-          <ListItemText primary="Bills" />
-        </ListItem>
-        <ListItem button component={Link} to="/distribution">
-          <ListItemText primary="Distribution" />
-        </ListItem>
-        <ListItem button component={Link} to="/forecast">
-          <ListItemText primary="Forecast" />
-        </ListItem>
-        <ListItem button component={Link} to="/create-bill">
-          <ListItemText primary="Create Bill" />
-        </ListItem>
-        <ListItem button component={Link} to="/distribution-objects">
-          <ListItemText primary="Distribution Objects" />
-        </ListItem>
-      </List>
-    </Drawer>
+    <aside variant="permanent">
+      <Link to="/">
+        Home
+      </Link>
+      <Link to="/bills">
+        Bills
+      </Link>
+      <Link to="/distribution">
+        Distribution
+      </Link>
+      <Link to="/forecast">
+        Forecast
+      </Link>
+      <Link to="/create-bill">
+        Create Bill
+      </Link>
+      <Link to="/distribution-objects">
+        Distribution Objects
+      </Link>
+    </aside>
   );
 };
 

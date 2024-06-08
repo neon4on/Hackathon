@@ -1,15 +1,11 @@
-import React from 'react';
-import { Container, Typography } from '@mui/material';
 import BillTable from '../components/BillTable';
 
 const Bills = () => {
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Bills
-      </Typography>
+    <div>
+      <h1>Bills</h1>
       <BillTable />
-    </Container>
+    </div>
   );
 };
 

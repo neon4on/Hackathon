@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button, TextField, Container, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { createBill } from '../api/api';
 
@@ -23,34 +22,25 @@ const CreateBill = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
+    <div>
+      <h1>
         Create Bill
-      </Typography>
+      </h1>
       <form onSubmit={handleSubmit}>
-        <TextField
-          label="Date"
+        <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
         />
-        <TextField
-          label="Amount"
+        <input
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          fullWidth
-          margin="normal"
         />
-        <Button variant="contained" color="primary" type="submit">
+        <button variant="contained" color="primary" type="submit">
           Create
-        </Button>
+        </button>
       </form>
-    </Container>
+    </div>
   );
 };
 

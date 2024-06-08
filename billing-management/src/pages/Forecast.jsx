@@ -1,14 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import { useState, useEffect } from 'react';
 import { fetchForecast } from '../api/api';
 
 const Forecast = () => {
@@ -28,33 +18,33 @@ const Forecast = () => {
   }, []);
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
+    <div>
+      <h1>
         Forecast
-      </Typography>
+      </h1>
       {forecast.length > 0 ? (
-        <Paper style={{ padding: '16px' }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Predicted Amount</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
+        <div>
+          <table>
+            <thead>
+              <th>
+                <td>Date</td>
+                <td>Predicted Amount</td>
+              </th>
+            </thead>
+            <tbody>
               {forecast.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell>{item.date}</TableCell>
-                  <TableCell>{item.predicted_amount?.toFixed(2)}</TableCell>
-                </TableRow>
+                <tr key={index}>
+                  <td>{item.date}</td>
+                  <td>{item.predicted_amount?.toFixed(2)}</td>
+                </tr>
               ))}
-            </TableBody>
-          </Table>
-        </Paper>
+            </tbody>
+          </table>
+        </div>
       ) : (
-        <Typography>No forecast data found</Typography>
+        <h1>No forecast data found</h1>
       )}
-    </Container>
+    </div>
   );
 };
 

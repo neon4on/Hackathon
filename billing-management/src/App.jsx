@@ -1,8 +1,6 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import Bills from './pages/Bills';
 import Distribution from './pages/Distribution';

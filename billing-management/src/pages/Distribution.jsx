@@ -1,15 +1,4 @@
-import React, { useState } from 'react';
-import {
-  Container,
-  Button,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Paper,
-} from '@mui/material';
+import { useState } from 'react';
 import { distributeBills } from '../api/api';
 import DistributionChart from '../components/DistributionChart';
 
@@ -26,43 +15,41 @@ const Distribution = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
+    <div>
+      <h1>
         Distribution
-      </Typography>
-      <Button variant="contained" color="primary" onClick={handleDistribute}>
+      </h1>
+      <button onClick={handleDistribute}>
         Start Distribution
-      </Button>
+      </button>
       {distributedBills.length > 0 && (
         <>
-          <Paper>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Amount</TableCell>
-                  <TableCell>Distributed Amount</TableCell>
-                  <TableCell>Object ID</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {distributedBills.map((bill) => (
-                  <TableRow key={bill.id}>
-                    <TableCell>{bill.id}</TableCell>
-                    <TableCell>{bill.date}</TableCell>
-                    <TableCell>{bill.amount}</TableCell>
-                    <TableCell>{bill.distributedAmount}</TableCell>
-                    <TableCell>{bill.objectId}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Paper>
+          <table>
+            <thead>
+              <th>
+                <td>ID</td>
+                <td>Date</td>
+                <td>Amount</td>
+                <td>Distributed Amount</td>
+                <td>Object ID</td>
+              </th>
+            </thead>
+            <tbody>
+              {distributedBills.map((bill) => (
+                <tr key={bill.id}>
+                  <td>{bill.id}</td>
+                  <td>{bill.date}</td>
+                  <td>{bill.amount}</td>
+                  <td>{bill.distributedAmount}</td>
+                  <td>{bill.objectId}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <DistributionChart data={distributedBills} />
         </>
       )}
-    </Container>
+    </div>
   );
 };
 

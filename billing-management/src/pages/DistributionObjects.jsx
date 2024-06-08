@@ -1,17 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  IconButton,
-} from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useState, useEffect } from 'react';
 import { fetchDistributionObjects, deleteDistributionObject } from '../api/api';
 
 const DistributionObjects = () => {
@@ -44,42 +31,40 @@ const DistributionObjects = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
+    <div>
+      <h1>
         Distribution Objects
-      </Typography>
+      </h1>
       {objects.length > 0 ? (
-        <Paper style={{ padding: '16px' }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
+          <table>
+            <thead>
+              <th>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Actions</td>
+              </th>
+            </thead>
+            <tbody>
               {objects.map((obj) => (
-                <TableRow key={obj.id}>
-                  <TableCell>{obj.name}</TableCell>
-                  <TableCell>{obj.description}</TableCell>
-                  <TableCell>
-                    <IconButton>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton onClick={() => handleDelete(obj.id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
+                <tr key={obj.id}>
+                  <td>{obj.name}</td>
+                  <td>{obj.description}</td>
+                  <td>
+                    <button>
+                      Edit
+                    </button>
+                    <button onClick={() => handleDelete(obj.id)}>
+                      delete
+                    </button>
+                  </td>
+                </tr>
               ))}
-            </TableBody>
-          </Table>
-        </Paper>
+            </tbody>
+          </table>
       ) : (
-        <Typography>No distribution objects found</Typography>
+        <h1>No distribution objects found</h1>
       )}
-    </Container>
+    </div>
   );
 };
 
