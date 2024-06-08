@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchForecast } from '../api/api';
+import { fetchForecast } from 'api/api';
 
 const Forecast = () => {
   const [forecast, setForecast] = useState([]);
@@ -26,10 +26,10 @@ const Forecast = () => {
         <div>
           <table>
             <thead>
-              <th>
-                <td>Date</td>
-                <td>Predicted Amount</td>
-              </th>
+              <tr>
+                <th>Date</th>
+                <th>Predicted Amount</th>
+              </tr>
             </thead>
             <tbody>
               {forecast.map((item, index) => (

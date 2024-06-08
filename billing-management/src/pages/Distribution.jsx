@@ -1,6 +1,9 @@
+import { distributeBills } from 'api/api';
 import { useState } from 'react';
-import { distributeBills } from '../api/api';
-import DistributionChart from '../components/DistributionChart';
+
+import DistributionChart from 'components/DistributionChart';
+
+import styles from 'styles/pages/Distribution.module.scss';
 
 const Distribution = () => {
   const [distributedBills, setDistributedBills] = useState([]);
@@ -26,13 +29,13 @@ const Distribution = () => {
         <>
           <table>
             <thead>
-              <th>
-                <td>ID</td>
-                <td>Date</td>
-                <td>Amount</td>
-                <td>Distributed Amount</td>
-                <td>Object ID</td>
-              </th>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Distributed Amount</th>
+                <th>Object ID</th>
+              </tr>
             </thead>
             <tbody>
               {distributedBills.map((bill) => (

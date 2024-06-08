@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import styles from 'styles/components/MLComponent.module.scss';
+
+
 const MLComponent = () => {
   const [data, setData] = useState(null);
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { createBill } from '../api/api';
+import { createBill } from 'api/api';
+
+import styles from 'styles/components/CreateBill.module.scss';
 
 const CreateBill = () => {
   const { enqueueSnackbar } = useSnackbar();

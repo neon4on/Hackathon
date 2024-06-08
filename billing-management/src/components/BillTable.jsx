@@ -1,6 +1,8 @@
 import{ useEffect, useState } from 'react';
 import axios from 'axios';
 
+import styles from 'styles/components/BillTable.module.scss';
+
 const BillTable = () => {
   const [bills, setBills] = useState([]);
 
@@ -20,11 +22,11 @@ const BillTable = () => {
   return (
     <table>
       <thead>
-        <th>
-          <td>ID</td>
-          <td>Дата</td>
-          <td>Количество</td>
-        </th>
+        <tr>
+          <th>ID</th>
+          <th>Дата</th>
+          <th>Количество</th>
+        </tr>
       </thead>
       <tbody>
         {Array.isArray(bills) &&

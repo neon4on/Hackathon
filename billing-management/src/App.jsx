@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import Header from './components/Header';
-import Home from './pages/Home';
-import Bills from './pages/Bills';
-import Distribution from './pages/Distribution';
-import Forecast from './pages/Forecast';
-import CreateBill from './components/CreateBill';
-import DistributionObjects from './pages/DistributionObjects';
-import MLComponent from './components/MLComponent';
+import Header from 'components/Header';
+import Home from 'pages/Home';
+import Bills from 'pages/Bills';
+import Distribution from 'pages/Distribution';
+import Forecast from 'pages/Forecast';
+import CreateBill from 'components/CreateBill';
+import DistributionObjects from 'pages/DistributionObjects';
+import MLComponent from 'components/MLComponent';
+
+// import Comp from 
 
 const App = () => {
   return (

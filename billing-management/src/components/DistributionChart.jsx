@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
+import styles from 'styles/components/DistributionChart.module.scss';
+
 const DistributionChart = ({ data }) => {
   const svgRef = useRef();
 

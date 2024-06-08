@@ -1,5 +1,7 @@
+import { fetchDistributionObjects, deleteDistributionObject } from 'api/api';
 import { useState, useEffect } from 'react';
-import { fetchDistributionObjects, deleteDistributionObject } from '../api/api';
+
+import styles from 'styles/pages/DistributionObjects.module.scss';
 
 const DistributionObjects = () => {
   const [objects, setObjects] = useState([]);
@@ -38,11 +40,11 @@ const DistributionObjects = () => {
       {objects.length > 0 ? (
           <table>
             <thead>
-              <th>
-                <td>Name</td>
-                <td>Description</td>
-                <td>Actions</td>
-              </th>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
             </thead>
             <tbody>
               {objects.map((obj) => (
