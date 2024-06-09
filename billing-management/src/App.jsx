@@ -1,35 +1,27 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import Header from 'components/Header';
-import Home from 'pages/Home';
-import Bills from 'pages/Bills';
-import Distribution from 'pages/Distribution';
-import Forecast from 'pages/Forecast';
-import CreateBill from 'components/CreateBill';
-import DistributionObjects from 'pages/DistributionObjects';
-import MLComponent from 'components/MLComponent';
 
-// import Comp from 
+import Landing from 'src/pages/Landing';
+import Home from 'src/pages/Home';
+import Bills from 'src/pages/Bills';
+import Objects from 'src/pages/Objects'
+import Control from 'src/pages/Control';
+import Forecast from 'src/pages/Forecast';
+import Distribution from 'src/pages/Distribution';
 
 const App = () => {
   return (
     <SnackbarProvider maxSnack={3}>
       <Router>
-        <Header />
-        <div style={{ display: 'flex' }}>
-          {/* <Sidebar /> */}
-          <main style={{ flexGrow: 1, padding: '1rem' }}>
-            <Routes>
-              <Route path="/ml" element={<MLComponent />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/bills" element={<Bills />} />
-              <Route path="/distribution" element={<Distribution />} />
-              <Route path="/forecast" element={<Forecast />} />
-              <Route path="/create-bill" element={<CreateBill />} />
-              <Route path="/distribution-objects" element={<DistributionObjects />} />
-            </Routes>
-          </main>
-        </div>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/bills" element={<Bills />} />
+          <Route path="/objects" element={<Objects />} />
+          <Route path="/control" element={<Control />} />
+          <Route path="/forecast" element={<Forecast />} />
+          <Route path="/distribution" element={<Distribution />} />
+        </Routes>
       </Router>
     </SnackbarProvider>
   );

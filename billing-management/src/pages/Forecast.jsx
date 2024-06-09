@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { fetchForecast } from 'api/api';
+import { fetchForecast } from 'src/api/api';
+
+import styles from 'src/styles/pages/Forecast.module.scss';
 
 const Forecast = () => {
   const [forecast, setForecast] = useState([]);
@@ -18,7 +20,7 @@ const Forecast = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.forecast}>
       <h1>
         Forecast
       </h1>

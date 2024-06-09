@@ -1,9 +1,9 @@
-import { distributeBills } from 'api/api';
+import { distributeBills } from 'src/api/api';
 import { useState } from 'react';
 
-import DistributionChart from 'components/DistributionChart';
+import DistributionChart from 'src/components/DistributionChart';
 
-import styles from 'styles/pages/Distribution.module.scss';
+import styles from 'src/styles/pages/Distribution.module.scss'
 
 const Distribution = () => {
   const [distributedBills, setDistributedBills] = useState([]);
@@ -18,7 +18,7 @@ const Distribution = () => {
   };
 
   return (
-    <div>
+    <div className={styles.distribution}>
       <h1>
         Distribution
       </h1>

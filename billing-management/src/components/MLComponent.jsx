@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import styles from 'styles/components/MLComponent.module.scss';
-
+import styles from 'src/styles/components/MLComponent.module.scss';
 
 const MLComponent = () => {
   const [data, setData] = useState(null);
@@ -21,7 +20,7 @@ const MLComponent = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.ML}>
       <h1>ML Data</h1>
       {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <p>Loading...</p>}
     </div>

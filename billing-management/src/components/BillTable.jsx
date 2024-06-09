@@ -1,7 +1,7 @@
 import{ useEffect, useState } from 'react';
 import axios from 'axios';
 
-import styles from 'styles/components/BillTable.module.scss';
+import styles from 'src/styles/components/BillTable.module.scss';
 
 const BillTable = () => {
   const [bills, setBills] = useState([]);
@@ -20,7 +20,7 @@ const BillTable = () => {
   }, []);
 
   return (
-    <table>
+    <table className={styles.billTable}>
       <thead>
         <tr>
           <th>ID</th>

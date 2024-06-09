@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
 
-import styles from 'styles/components/Sidebar.module.scss';
+import styles from 'src/styles/components/Sidebar.module.scss';
 
 const Sidebar = () => {
   return (
-    <aside variant="permanent">
+    <aside className={styles.aside}>
       <Link to="/">
         Home
       </Link>

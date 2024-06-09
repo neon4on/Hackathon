@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { createBill } from 'api/api';
+import { createBill } from 'src/api/api';
 
-import styles from 'styles/components/CreateBill.module.scss';
+import styles from 'src/styles/components/CreateBill.module.scss';
 
 const CreateBill = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -24,7 +24,7 @@ const CreateBill = () => {
   };
 
   return (
-    <div>
+    <div className={styles.createbill}>
       <h1>
         Create Bill
       </h1>
@@ -38,7 +38,7 @@ const CreateBill = () => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <button variant="contained" color="primary" type="submit">
+        <button type="submit">
           Create
         </button>
       </form>

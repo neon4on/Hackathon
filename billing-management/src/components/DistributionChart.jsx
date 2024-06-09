@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
+
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-import styles from 'styles/components/DistributionChart.module.scss';
+import styles from 'src/styles/components/DistributionChart.module.scss';
 
 const DistributionChart = ({ data }) => {
   const svgRef = useRef();
@@ -45,7 +47,11 @@ const DistributionChart = ({ data }) => {
       .attr('height', (d) => height - y(d.distributedAmount));
   }, [data]);
 
-  return <svg ref={svgRef}></svg>;
+  return <svg ref={svgRef} className={styles.distributinChart}></svg>;
 };
+
+DistributionChart.propTypes = {
+  data: PropTypes.string
+}
 
 export default DistributionChart;
