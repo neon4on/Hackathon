@@ -36,13 +36,55 @@ const AppContent = () => {
         {!hideHeaderAndSidebar && <Sidebar />}
         <main style={{ flexGrow: 1 }}>
           <Routes>
-            <Route path="/ml" element={<ProtectedRoute><MLComponent /></ProtectedRoute>} />
+            <Route
+              path="/ml"
+              element={
+                <ProtectedRoute>
+                  <MLComponent />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/" element={<Home />} />
-            <Route path="/bills" element={<ProtectedRoute><Bills /></ProtectedRoute>} />
-            <Route path="/distribution" element={<ProtectedRoute><Distribution /></ProtectedRoute>} />
-            <Route path="/forecast" element={<ProtectedRoute><Forecast /></ProtectedRoute>} />
-            <Route path="/create-bill" element={<ProtectedRoute><CreateBill /></ProtectedRoute>} />
-            <Route path="/distribution-objects" element={<ProtectedRoute><DistributionObjects /></ProtectedRoute>} />
+            <Route
+              path="/bills"
+              element={
+                <ProtectedRoute>
+                  <Bills />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/distribution"
+              element={
+                <ProtectedRoute>
+                  <Distribution />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/forecast"
+              element={
+                <ProtectedRoute>
+                  <Forecast />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/create-bill"
+              element={
+                <ProtectedRoute>
+                  <CreateBill />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/distribution-objects"
+              element={
+                <ProtectedRoute>
+                  <DistributionObjects />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </main>
