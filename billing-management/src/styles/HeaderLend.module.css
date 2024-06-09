@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background: white;
+  width: 1240px;
+  margin: 31px auto;
+}
+
+
+.navList {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+
+.navList a {
+  text-decoration: none;
+  color: black;
+}

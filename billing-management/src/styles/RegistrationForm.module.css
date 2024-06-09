@@ -1,0 +1,32 @@
+.registrationForm {
+    width: 35%;
+  }
+  
+  .registrationForm h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .registrationForm form {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .registrationForm input {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+  }
+  
+  .registrationForm button {
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #21A049;
+    border: none;
+    cursor: pointer;
+  }
+  

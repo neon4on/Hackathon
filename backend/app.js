@@ -7,7 +7,9 @@ const forecastRoutes = require('./routes/forecast');
 const mlRoutes = require('./routes/ml'); // Импортируем маршруты для ML
 const { exec } = require('child_process');
 const path = require('path');
-
+const authRoutes = require('./routes/auth');
+const passwordResetRoutes = require('./routes/passwordReset');
+const pool = require('./config/db');
 const app = express();
 
 app.use(cors()); // Используем cors
@@ -17,7 +19,8 @@ app.use('/api/bills', billRoutes);
 app.use('/api/distribution-objects', distributionObjectRoutes);
 app.use('/api/forecast', forecastRoutes);
 // app.use('/api/ml', mlRoutes); // Добавляем маршруты для ML
-
+app.use('/api/auth', authRoutes);
+app.use('/api/password-reset', passwordResetRoutes);
 app.post('/api/ml', (req, res) => {
   const scriptPath = path.join(__dirname, 'ml', 'process.py');
   exec(`python ${scriptPath}`, (error, stdout, stderr) => {

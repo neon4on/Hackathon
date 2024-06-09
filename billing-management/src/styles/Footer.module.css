@@ -1,0 +1,25 @@
+.footer {
+  padding: 20px;
+  width: 1240px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.links ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.links li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+}
+
+.links li a {
+  color: #21A049;
+  text-decoration: none;
+}
