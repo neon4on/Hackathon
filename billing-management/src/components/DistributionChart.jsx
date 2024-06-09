@@ -1,15 +1,19 @@
-import React, { useEffect, useRef } from 'react';
-import * as d3 from 'd3';
+import PropTypes from "prop-types";
+
+import { useEffect, useRef } from "react";
+import * as d3 from "d3";
+
+import styles from "src/styles/components/DistributionChart.module.scss";
 
 const DistributionChart = ({ data }) => {
   const svgRef = useRef();
 
   useEffect(() => {
-    const svg = d3.select(svgRef.current).attr('width', 600).attr('height', 400);
+    const svg = d3.select(svgRef.current).attr("width", 600).attr("height", 400);
 
     const margin = { top: 20, right: 30, bottom: 40, left: 40 };
-    const width = +svg.attr('width') - margin.left - margin.right;
-    const height = +svg.attr('height') - margin.top - margin.bottom;
+    const width = +svg.attr("width") - margin.left - margin.right;
+    const height = +svg.attr("height") - margin.top - margin.bottom;
 
     const x = d3
       .scaleBand()
@@ -23,27 +27,31 @@ const DistributionChart = ({ data }) => {
       .nice()
       .range([height, 0]);
 
-    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+    const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-    g.append('g')
-      .attr('class', 'axis axis--x')
-      .attr('transform', `translate(0,${height})`)
+    g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", `translate(0,${height})`)
       .call(d3.axisBottom(x));
 
-    g.append('g').attr('class', 'axis axis--y').call(d3.axisLeft(y).ticks(10));
+    g.append("g").attr("class", "axis axis--y").call(d3.axisLeft(y).ticks(10));
 
-    g.selectAll('.bar')
+    g.selectAll(".bar")
       .data(data)
       .enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('x', (d) => x(d.id))
-      .attr('y', (d) => y(d.distributedAmount))
-      .attr('width', x.bandwidth())
-      .attr('height', (d) => height - y(d.distributedAmount));
+      .append("rect")
+      .attr("class", "bar")
+      .attr("x", (d) => x(d.id))
+      .attr("y", (d) => y(d.distributedAmount))
+      .attr("width", x.bandwidth())
+      .attr("height", (d) => height - y(d.distributedAmount));
   }, [data]);
 
-  return <svg ref={svgRef}></svg>;
+  return <svg ref={svgRef} className={styles.distributinChart}></svg>;
+};
+
+DistributionChart.propTypes = {
+  data: PropTypes.string,
 };
 
 export default DistributionChart;

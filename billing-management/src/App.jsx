@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import Home from './pages/Home';
-import Bills from './pages/Bills';
-import Distribution from './pages/Distribution';
-import Forecast from './pages/Forecast';
-import CreateBill from './components/CreateBill';
-import DistributionObjects from './pages/DistributionObjects';
-import MLComponent from './components/MLComponent';
-import LoginForm from './components/LoginForm';
-import RegistrationForm from './components/RegistrationForm';
-import ResetPassword from './pages/ResetPassword';
+
+import Landing from 'src/pages/Landing';
+import Home from 'src/pages/Home';
+import Bills from 'src/pages/Bills';
+import Objects from 'src/pages/Objects';
+import Control from 'src/pages/Control';
+import Forecast from 'src/pages/Forecast';
+import Distribution from 'src/pages/Distribution';
+import DistributedPaymentInvoices from 'src/pages/DistributedPaymentInvoices';
+
+import Header from 'src/components/Header';
+import Sidebar from 'src/components/Sidebar';
 import ProtectedRoute from './ProtectedRoute';
 
 const App = () => {
@@ -31,7 +31,6 @@ const AppContent = () => {
 
   return (
     <>
-      {!hideHeaderAndSidebar && <Header />}
       <div style={{ display: 'flex' }}>
         {!hideHeaderAndSidebar && <Sidebar />}
         <main style={{ flexGrow: 1 }}>

@@ -1,56 +1,38 @@
-import React, { useState } from 'react';
-import { Button, TextField, Container, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
-import { createBill } from '../api/api';
+import { useState } from "react";
+import { useSnackbar } from "notistack";
+import { createBill } from "src/api/api";
+
+import styles from "src/styles/components/CreateBill.module.scss";
 
 const CreateBill = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const [date, setDate] = useState('');
-  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState("");
+  const [amount, setAmount] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const bill = { date, amount };
     try {
       await createBill(bill);
-      setDate('');
-      setAmount('');
-      enqueueSnackbar('Bill created successfully!', { variant: 'success' });
+
+      setDate("");
+      setAmount("");
+      enqueueSnackbar("Bill created successfully!", { variant: "success" });
     } catch (error) {
-      enqueueSnackbar('Error creating bill.', { variant: 'error' });
-      console.error('Error creating bill:', error);
+      enqueueSnackbar("Error creating bill.", { variant: "error" });
+      console.error("Error creating bill:", error);
     }
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Create Bill
-      </Typography>
+    <div className={styles.createbill}>
+      <h1>Create Bill</h1>
       <form onSubmit={handleSubmit}>
-        <TextField
-          label="Date"
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <TextField
-          label="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          fullWidth
-          margin="normal"
-        />
-        <Button variant="contained" color="primary" type="submit">
-          Create
-        </Button>
+        <input type='date' value={date} onChange={(e) => setDate(e.target.value)} />
+        <input value={amount} onChange={(e) => setAmount(e.target.value)} />
+        <button type='submit'>Create</button>
       </form>
-    </Container>
+    </div>
   );
 };
 

@@ -1,0 +1,81 @@
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #203020;
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  select {
+    background-color: #304030;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    margin-right: 10px;
+  }
+}
+
+.dataTable {
+  margin-bottom: 20px;
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #405040;
+    }
+
+    th {
+      background-color: #304030;
+    }
+
+    td {
+      background-color: #203020;
+    }
+  }
+}
+
+.exportSection {
+  button {
+    background-color: #008000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .exportOptions {
+    display: flex;
+    flex-direction: column;
+
+    input[type='radio'] {
+      margin: 10px 0;
+    }
+
+    input[type='text'] {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #304030;
+      color: #fff;
+      border: none;
+    }
+
+    button {
+      background-color: #008000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  }
+}

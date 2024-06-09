@@ -1,13 +1,10 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import styles from "src/styles/components/Header.module.scss";
 
 const Header = () => {
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6">Billing Management System</Typography>
-      </Toolbar>
-    </AppBar>
+    <nav className={styles.nav}>
+      <h1>Billing Management System</h1>
+    </nav>
   );
 };
 
