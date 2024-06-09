@@ -1,9 +1,9 @@
-import { distributeBills } from 'src/api/api';
-import { useState } from 'react';
+import { distributeBills } from "src/api/api";
+import { useState } from "react";
 
-import DistributionChart from 'src/components/DistributionChart';
+import DistributionChart from "src/components/DistributionChart";
 
-import styles from 'src/styles/pages/Distribution.module.scss'
+import styles from "src/styles/pages/Distribution.module.scss";
 
 const Distribution = () => {
   const [distributedBills, setDistributedBills] = useState([]);
@@ -13,18 +13,14 @@ const Distribution = () => {
       const response = await distributeBills();
       setDistributedBills(response.data);
     } catch (error) {
-      console.error('Error distributing bills:', error);
+      console.error("Error distributing bills:", error);
     }
   };
 
   return (
     <div className={styles.distribution}>
-      <h1>
-        Distribution
-      </h1>
-      <button onClick={handleDistribute}>
-        Start Distribution
-      </button>
+      <h1>Distribution</h1>
+      <button onClick={handleDistribute}>Start Distribution</button>
       {distributedBills.length > 0 && (
         <>
           <table>

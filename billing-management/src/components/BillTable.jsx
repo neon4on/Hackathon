@@ -1,7 +1,7 @@
-import{ useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-import styles from 'src/styles/components/BillTable.module.scss';
+import styles from "src/styles/components/BillTable.module.scss";
 
 const BillTable = () => {
   const [bills, setBills] = useState([]);
@@ -9,10 +9,10 @@ const BillTable = () => {
   useEffect(() => {
     const fetchBills = async () => {
       try {
-        const response = await axios.get('/api/bills');
+        const response = await axios.get("/api/bills");
         setBills(response.data || []);
       } catch (error) {
-        console.error('Error fetching bills:', error);
+        console.error("Error fetching bills:", error);
         setBills([]);
       }
     };
@@ -36,10 +36,10 @@ const BillTable = () => {
               <td>{bill.date}</td>
               <td>{bill.amount}</td>
             </tr>
-        ))}
+          ))}
       </tbody>
-  </table>
-  );  
+    </table>
+  );
 };
 
 export default BillTable;

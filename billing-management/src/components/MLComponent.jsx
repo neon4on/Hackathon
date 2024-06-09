@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-import styles from 'src/styles/components/MLComponent.module.scss';
+import styles from "src/styles/components/MLComponent.module.scss";
 
 const MLComponent = () => {
   const [data, setData] = useState(null);
@@ -9,10 +9,10 @@ const MLComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:3000/api/ml');
+        const response = await axios.post("http://localhost:3000/api/ml");
         setData(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 

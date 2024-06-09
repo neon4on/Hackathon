@@ -1,4 +1,4 @@
-import styles from 'src/styles/pages/Home.module.scss';
+import styles from "src/styles/pages/Home.module.scss";
 
 const Home = () => {
   return (

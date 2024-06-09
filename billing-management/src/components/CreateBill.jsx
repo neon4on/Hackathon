@@ -1,46 +1,36 @@
-import { useState } from 'react';
-import { useSnackbar } from 'notistack';
-import { createBill } from 'src/api/api';
+import { useState } from "react";
+import { useSnackbar } from "notistack";
+import { createBill } from "src/api/api";
 
-import styles from 'src/styles/components/CreateBill.module.scss';
+import styles from "src/styles/components/CreateBill.module.scss";
 
 const CreateBill = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const [date, setDate] = useState('');
-  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState("");
+  const [amount, setAmount] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const bill = { date, amount };
     try {
       await createBill(bill);
-      setDate('');
-      setAmount('');
-      enqueueSnackbar('Bill created successfully!', { variant: 'success' });
+
+      setDate("");
+      setAmount("");
+      enqueueSnackbar("Bill created successfully!", { variant: "success" });
     } catch (error) {
-      enqueueSnackbar('Error creating bill.', { variant: 'error' });
-      console.error('Error creating bill:', error);
+      enqueueSnackbar("Error creating bill.", { variant: "error" });
+      console.error("Error creating bill:", error);
     }
   };
 
   return (
     <div className={styles.createbill}>
-      <h1>
-        Create Bill
-      </h1>
+      <h1>Create Bill</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <input
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <button type="submit">
-          Create
-        </button>
+        <input type='date' value={date} onChange={(e) => setDate(e.target.value)} />
+        <input value={amount} onChange={(e) => setAmount(e.target.value)} />
+        <button type='submit'>Create</button>
       </form>
     </div>
   );

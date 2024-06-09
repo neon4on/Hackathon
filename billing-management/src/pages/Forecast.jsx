@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { fetchForecast } from 'src/api/api';
+import { useState, useEffect } from "react";
+import { fetchForecast } from "src/api/api";
 
-import styles from 'src/styles/pages/Forecast.module.scss';
+import styles from "src/styles/pages/Forecast.module.scss";
 
 const Forecast = () => {
   const [forecast, setForecast] = useState([]);
@@ -10,10 +10,10 @@ const Forecast = () => {
     const getForecast = async () => {
       try {
         const response = await fetchForecast();
-        console.log('Fetched forecast:', response.data); // Debugging line
+        console.log("Fetched forecast:", response.data); // Debugging line
         setForecast(response.data);
       } catch (error) {
-        console.error('Error fetching forecast:', error);
+        console.error("Error fetching forecast:", error);
       }
     };
     getForecast();
@@ -21,9 +21,7 @@ const Forecast = () => {
 
   return (
     <div className={styles.forecast}>
-      <h1>
-        Forecast
-      </h1>
+      <h1>Forecast</h1>
       {forecast.length > 0 ? (
         <div>
           <table>

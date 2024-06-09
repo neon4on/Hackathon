@@ -1,6 +1,6 @@
-import BillTable from 'src/components/BillTable';
+import BillTable from "src/components/BillTable";
 
-import styles from 'src/styles/pages/Bills.module.scss';
+import styles from "src/styles/pages/Bills.module.scss";
 
 const Bills = () => {
   return (
