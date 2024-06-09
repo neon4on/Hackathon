@@ -8,6 +8,7 @@ import Bills from 'src/pages/Bills';
 import Objects from 'src/pages/Objects';
 import Control from 'src/pages/Control';
 import Forecast from 'src/pages/Forecast';
+import ResetPassword from 'src/pages/ResetPassword';
 import Distribution from 'src/pages/Distribution';
 import DistributedPaymentInvoices from 'src/pages/DistributedPaymentInvoices';
 
@@ -35,15 +36,8 @@ const AppContent = () => {
         {!hideHeaderAndSidebar && <Sidebar />}
         <main style={{ flexGrow: 1 }}>
           <Routes>
-            <Route
-              path="/ml"
-              element={
-                <ProtectedRoute>
-                  <MLComponent />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/home" element={<Home />} />
             <Route
               path="/bills"
               element={
@@ -69,18 +63,10 @@ const AppContent = () => {
               }
             />
             <Route
-              path="/create-bill"
+              path="/distributedpaymentinvoices"
               element={
                 <ProtectedRoute>
-                  <CreateBill />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/distribution-objects"
-              element={
-                <ProtectedRoute>
-                  <DistributionObjects />
+                  <DistributedPaymentInvoices />
                 </ProtectedRoute>
               }
             />
