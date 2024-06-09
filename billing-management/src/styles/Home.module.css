@@ -1,0 +1,13 @@
+*{
+    font-family: sans-serif;
+    margin: 0;
+}
+
+
+
+.forms {
+    display: flex;
+    justify-content: space-between;
+    width: 1240px;
+    margin: 20px auto;
+}
