@@ -10,6 +10,10 @@ import Forecast from './pages/Forecast';
 import CreateBill from './components/CreateBill';
 import DistributionObjects from './pages/DistributionObjects';
 import MLComponent from './components/MLComponent';
+import LoginForm from './components/LoginForm';
+import RegistrationForm from './components/RegistrationForm';
+import ResetPassword from './pages/ResetPassword';
+import ProtectedRoute from './ProtectedRoute';
 
 const App = () => {
   return (
@@ -23,21 +27,23 @@ const App = () => {
 
 const AppContent = () => {
   const location = useLocation();
+  const hideHeaderAndSidebar = location.pathname === '/' || location.pathname === '/reset-password';
 
   return (
     <>
-      {location.pathname !== '/' && <Header />}
+      {!hideHeaderAndSidebar && <Header />}
       <div style={{ display: 'flex' }}>
-        {location.pathname !== '/' && <Sidebar />}
-        <main style={{ flexGrow: 1}}>
+        {!hideHeaderAndSidebar && <Sidebar />}
+        <main style={{ flexGrow: 1 }}>
           <Routes>
-            <Route path="/ml" element={<MLComponent />} />
+            <Route path="/ml" element={<ProtectedRoute><MLComponent /></ProtectedRoute>} />
             <Route path="/" element={<Home />} />
-            <Route path="/bills" element={<Bills />} />
-            <Route path="/distribution" element={<Distribution />} />
-            <Route path="/forecast" element={<Forecast />} />
-            <Route path="/create-bill" element={<CreateBill />} />
-            <Route path="/distribution-objects" element={<DistributionObjects />} />
+            <Route path="/bills" element={<ProtectedRoute><Bills /></ProtectedRoute>} />
+            <Route path="/distribution" element={<ProtectedRoute><Distribution /></ProtectedRoute>} />
+            <Route path="/forecast" element={<ProtectedRoute><Forecast /></ProtectedRoute>} />
+            <Route path="/create-bill" element={<ProtectedRoute><CreateBill /></ProtectedRoute>} />
+            <Route path="/distribution-objects" element={<ProtectedRoute><DistributionObjects /></ProtectedRoute>} />
+            <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </main>
       </div>
