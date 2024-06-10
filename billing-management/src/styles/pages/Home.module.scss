@@ -1,0 +1,140 @@
+.home {
+    padding: 20px;
+    color: #d1d1d1;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        color: #d1d1d1;
+
+        h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #d1d1d1;
+        }
+
+        input {
+            padding: 5px 10px;
+            font-size: 14px;
+            border: 1px solid #d1d1d1;
+            background-color: #2a4d34;
+            color: #d1d1d1;
+            border-radius: 5px;
+
+            &::placeholder {
+                color: #a1a1a1;
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        gap: 20px;
+
+        .taskStatus,
+        .recentChanges,
+        .importantMessages {
+            background-color: #2a4d34;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        .taskStatus {
+            width: 27vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .progressWrapper {
+                display: flex;
+                align-items: center;
+            }
+
+            .progress {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 150px;
+
+                svg {
+                    position: absolute;
+                    width: 100px;
+                    height: 100px;
+                }
+
+            }
+
+            .progressText {
+                flex-direction: column;
+                display: flex;
+                gap: 15px;
+                text-align: center;
+                color: #d1d1d1;
+            }
+
+            .weeklyPercents {
+                display: flex;
+                justify-content: space-around;
+
+                .up {
+                    color: #7BFAA3;
+                }
+
+                .down {
+                    color: #EEEA1A;
+                }
+            }
+
+            .legend {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                div {
+                    display: flex;
+                    gap: 5px;
+                }
+
+                .greenBox {
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    background-color: #7BFAA3;
+                }
+
+                .yellowBox {
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    background-color: #EEEA1A;
+                }
+            }
+        }
+
+        .recentChanges,
+        .importantMessages {
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                color: #d1d1d1;
+
+                th,
+                td {
+                    border: 1px solid #3b6d48;
+                    padding: 10px;
+                    text-align: left;
+                }
+
+                th {
+                    background-color: #3b6d48;
+                }
+            }
+        }
+    }
+}
