@@ -3,8 +3,8 @@ import styles from '../styles/components/DataTable.module.scss';
 
 const DataTable = ({ data, columns }) => {
   return (
-    <div className={styles.tableContainer}>
-      <table className={styles.table}>
+    <div className={styles.dataTable}>
+      <table>
         <thead>
           <tr>
             {columns.map((column) => (
