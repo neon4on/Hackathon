@@ -224,9 +224,9 @@ function App() {
             <DataTable
               data={[
                 {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
+                  id: 1000,
+                  startYear: 2000,
+                  endYear: 56,
                   measurementEnd: 'см.файл',
                   measurementStart: 'см.файл',
                   areaUnit: 'кв.метр',

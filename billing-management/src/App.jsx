@@ -9,6 +9,7 @@ import ObjectDistributionPage from 'src/pages/ObjectDistributionPage';
 import Forecast from 'src/pages/Forecast';
 import ResetPassword from 'src/pages/ResetPassword';
 import DistributedPaymentInvoices from 'src/pages/DistributedPaymentInvoices';
+import DistributionManagement from 'src/pages/DistributionManagement';
 
 import Header from 'src/components/Header';
 import Sidebar from 'src/components/Sidebar';
@@ -36,6 +37,7 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
+          {/* 1 */}
           <Route
             path="/bills"
             element={
@@ -44,6 +46,7 @@ const AppContent = () => {
               </ProtectedRoute>
             }
           />
+          {/* 2 */}
           <Route
             path="/objectdistributionpage"
             element={
@@ -52,11 +55,12 @@ const AppContent = () => {
               </ProtectedRoute>
             }
           />
+          {/* 3 */}
           <Route
-            path="/forecast"
+            path="/DistributionManagement"
             element={
               <ProtectedRoute>
-                <Forecast />
+                <DistributionManagement />
               </ProtectedRoute>
             }
           />
@@ -68,6 +72,16 @@ const AppContent = () => {
               </ProtectedRoute>
             }
           />
+          {/* 5 */}
+          <Route
+            path="/forecast"
+            element={
+              <ProtectedRoute>
+                <Forecast />
+              </ProtectedRoute>
+            }
+          />
+          {/* 6 */}
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </main>

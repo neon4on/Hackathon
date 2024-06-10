@@ -17,7 +17,7 @@ const Sidebar = () => {
         <img src="/icons/distribution.svg" alt="ObjectDistributionPage" className={styles.icon} />
         Объекты распределения
       </Link>
-      <Link to="/control">
+      <Link to="/DistributionManagement">
         <img src="/icons/control.svg" alt="Control" className={styles.icon} />
         Управление распределение
       </Link>
