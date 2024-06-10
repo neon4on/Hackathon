@@ -5,16 +5,15 @@ import { SnackbarProvider } from 'notistack';
 import Landing from 'src/pages/Landing';
 import Home from 'src/pages/Home';
 import Bills from 'src/pages/Bills';
-import Objects from 'src/pages/Objects';
-import Control from 'src/pages/Control';
+import Distribution from 'src/pages/Distribution';
 import Forecast from 'src/pages/Forecast';
 import ResetPassword from 'src/pages/ResetPassword';
-import Distribution from 'src/pages/Distribution';
 import DistributedPaymentInvoices from 'src/pages/DistributedPaymentInvoices';
 
 import Header from 'src/components/Header';
 import Sidebar from 'src/components/Sidebar';
 import ProtectedRoute from './ProtectedRoute';
+import './styles/globals.scss'; // Убедитесь, что вы импортируете глобальные стили
 
 const App = () => {
   return (
@@ -31,50 +30,48 @@ const AppContent = () => {
   const hideHeaderAndSidebar = location.pathname === '/' || location.pathname === '/reset-password';
 
   return (
-    <>
-      <div style={{ display: 'flex' }}>
-        {!hideHeaderAndSidebar && <Sidebar />}
-        <main style={{ flexGrow: 1 }}>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/home" element={<Home />} />
-            <Route
-              path="/bills"
-              element={
-                <ProtectedRoute>
-                  <Bills />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/distribution"
-              element={
-                <ProtectedRoute>
-                  <Distribution />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/forecast"
-              element={
-                <ProtectedRoute>
-                  <Forecast />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/distributedpaymentinvoices"
-              element={
-                <ProtectedRoute>
-                  <DistributedPaymentInvoices />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/reset-password" element={<ResetPassword />} />
-          </Routes>
-        </main>
-      </div>
-    </>
+    <div className="app-container">
+      {!hideHeaderAndSidebar && <Sidebar />}
+      <main className="content">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/home" element={<Home />} />
+          <Route
+            path="/bills"
+            element={
+              <ProtectedRoute>
+                <Bills />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/distribution"
+            element={
+              <ProtectedRoute>
+                <Distribution />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/forecast"
+            element={
+              <ProtectedRoute>
+                <Forecast />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/distributedpaymentinvoices"
+            element={
+              <ProtectedRoute>
+                <DistributedPaymentInvoices />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Routes>
+      </main>
+    </div>
   );
 };
 

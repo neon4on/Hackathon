@@ -1,20 +1,35 @@
-.aside {
+@import '../globals.scss';
+
+.sidebar {
   width: 250px;
-  background-color: #304030;
-  color: #fff;
+  background-color: var(--dashboard-column); // Использование переменной
+  color: var(--text-white); // Использование переменной
   padding: 20px;
   display: flex;
   flex-direction: column;
+  font-family: 'Inter', sans-serif; // Добавлен стиль шрифта
+  font-size: 17px; // Добавлен размер шрифта
+  font-weight: 400; // Добавлен вес шрифта
+  line-height: 22.1px; // Добавлена высота строки
+  text-align: left; // Добавлено выравнивание текста
 }
 
-.aside a {
-  color: #fff;
+.sidebar a {
+  color: var(--text-white); // Использование переменной
   text-decoration: none;
   padding: 10px 0;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
-.aside a:hover {
+.sidebar a:hover {
   background-color: #405040;
   padding-left: 10px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
