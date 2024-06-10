@@ -13,8 +13,8 @@ const Sidebar = () => {
         <img src="/icons/bills.svg" alt="Bills" className={styles.icon} />
         Счета на оплату
       </Link>
-      <Link to="/distribution">
-        <img src="/icons/distribution.svg" alt="Distribution" className={styles.icon} />
+      <Link to="/objectdistributionpage">
+        <img src="/icons/distribution.svg" alt="ObjectDistributionPage" className={styles.icon} />
         Объекты распределения
       </Link>
       <Link to="/control">

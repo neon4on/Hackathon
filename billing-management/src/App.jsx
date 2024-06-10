@@ -5,7 +5,7 @@ import { SnackbarProvider } from 'notistack';
 import Landing from 'src/pages/Landing';
 import Home from 'src/pages/Home';
 import Bills from 'src/pages/Bills';
-import Distribution from 'src/pages/Distribution';
+import ObjectDistributionPage from 'src/pages/ObjectDistributionPage';
 import Forecast from 'src/pages/Forecast';
 import ResetPassword from 'src/pages/ResetPassword';
 import DistributedPaymentInvoices from 'src/pages/DistributedPaymentInvoices';
@@ -45,10 +45,10 @@ const AppContent = () => {
             }
           />
           <Route
-            path="/distribution"
+            path="/objectdistributionpage"
             element={
               <ProtectedRoute>
-                <Distribution />
+                <ObjectDistributionPage />
               </ProtectedRoute>
             }
           />
