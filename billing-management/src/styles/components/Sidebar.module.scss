@@ -12,7 +12,6 @@
   flex-direction: column;
   gap: 12px;
   background-color: var(--dashboard-column);
-
   .title {
     margin-bottom: 52px;
     font-size: 28px;
@@ -21,7 +20,6 @@
     text-align: left;
     color: var(--text-white);
   }
-
   .link {
     display: flex;
     align-items: flex-start;
@@ -29,13 +27,11 @@
     text-decoration: none;
     color: var(--text-secondary);
     padding: 4px 0 10px;
-
     img {
       display: block;
       width: 24px;
       height: 24px;
     }
-
     span {
       display: block;
       width: 160px;
@@ -45,15 +41,8 @@
       text-align: left;
     }
   }
-
   .activeLink > span,
   .link:hover {
     color: var(--text-white);
   }
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
 }

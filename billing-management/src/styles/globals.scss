@@ -35,7 +35,6 @@
     height: 14px;
     border: none;
   }
-
   &::-webkit-scrollbar-thumb {
     display: block;
     width: 4px;
@@ -80,11 +79,12 @@ body {
     overflow: auto;
     position: relative;
     left: 300px;
-    padding: 50px 40px;
     @include scrollbar;
+    background-color: var(--dashboard-backgr);
 
     .page-content {
       min-width: calc(1920px - 300px);
+      padding: 50px 40px;
       width: auto;
     }
   }
