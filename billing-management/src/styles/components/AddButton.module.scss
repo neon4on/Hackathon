@@ -1,8 +1,14 @@
 button {
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
+  width: 370px;
+  height: 36px;
+  padding: 6px 0;
+  background-color: var(--sb-green2);
+  color: var(--text-white);
   border: none;
-  border-radius: 5px;
+  border-radius: 17px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 19.5px;
+  text-align: center;
 }

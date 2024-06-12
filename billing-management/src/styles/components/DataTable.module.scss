@@ -17,9 +17,13 @@
     width: 100%;
     border-collapse: collapse;
     border: none;
-
     thead {
       border-bottom: 1px solid var(--divider-bold);
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--divider-thin);
+      }
     }
     th,
     td {

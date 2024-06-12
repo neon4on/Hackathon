@@ -4,8 +4,19 @@ nav {
     display: flex;
     text-decoration: none;
     list-style: none;
+    gap: 20px;
 
     li {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 31.2px;
+      text-align: left;
+      color: var(--text-secondary);
+      cursor: pointer;
+      &.active,
+      &:hover {
+        color: var(--text-secondary-light);
+      }
     }
   }
 }
