@@ -1,27 +1,31 @@
-import React from 'react';
-import styles from '../styles/components/DataTable.module.scss';
+import React from "react";
+import styles from "../styles/components/DataTable.module.scss";
 
-const DataTable = ({ data, columns }) => {
+import cn from "classnames";
+
+const DataTable = ({ data, columns, className = "" }) => {
   return (
-    <div className={styles.dataTable}>
-      <table>
-        <thead>
-          <tr>
-            {columns.map((column) => (
-              <th key={column.key}>{column.label}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={index}>
+    <div className={cn(styles.dataTable, className)}>
+      <div className={styles.dataTableOverflow}>
+        <table>
+          <thead>
+            <tr>
               {columns.map((column) => (
-                <td key={column.key}>{row[column.key]}</td>
+                <th key={column.key}>{column.label}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((row, index) => (
+              <tr key={index}>
+                {columns.map((column) => (
+                  <td key={column.key}>{row[column.key]}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

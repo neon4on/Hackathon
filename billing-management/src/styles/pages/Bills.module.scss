@@ -1,84 +1,143 @@
 .uploadData {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
+  margin-top: 50px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
 
+  .chooseFile {
+    width: 370px;
 
-.fileInputWrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-}
+    .fileInputWrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 20px;
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+      }
 
-.fileInput {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    height: 100%;
-    cursor: pointer;
-}
+      .fileInputContent {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        background: var(--dashboard-column);
+        border-radius: 20px;
+      }
 
-.fileInputLabel {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    // width: 100%;
-    height: 150px;
-    border: 2px dashed #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    
-    transition: border-color 0.3s ease;
-
-    &:hover {
-        border-color: #999;
+      .fileInputText {
+        border: 1px dashed var(--divider-bold);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 13px;
+        padding: 20px;
+        img {
+          display: block;
+          width: 24px;
+          height: 24px;
+        }
+        span {
+          display: block;
+          font-size: 15px;
+          font-weight: 400;
+          line-height: 19.5px;
+          text-align: left;
+          color: var(--text-secondary);
+        }
+      }
+      .fileInputOr {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 16.9px;
+        text-align: left;
+        color: var(--text-secondary-light);
+      }
+      .fileInputButton {
+        display: block;
+        padding: 6px;
+        width: 100%;
+        height: 36px;
+        background: var(--sb-green3);
+        color: var(--text-white);
+        border-radius: 17px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 19.5px;
+        text-align: center;
+        cursor: pointer;
+      }
     }
+    .loadButton {
+      margin-top: 20px;
+      width: 100%;
+      height: 36px;
+      padding: 7px;
+      border-radius: 17px;
+      color: var(--text-white);
+      background: var(--text-secondary);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 19.5px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
 }
 
-.fileInputContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.uploadedFiles {
+  width: 370px;
+  background: var(--dashboard-column);
+  padding: 20px;
+  border-radius: 20px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26px;
+    text-align: left;
+    color: var(--text-white);
+  }
+
+  table {
+    margin-top: 20px;
+    width: 100%;
+    td {
+      padding: 5px 0;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 16.9px;
+      text-align: left;
+      color: var(--text-secondary);
+      img {
+        display: block;
+        width: 24px;
+        height: 24px;
+      }
+      &:first-child {
+        padding-top: 0 !important;
+      }
+    }
+  }
 }
 
-.fileInputText {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 10px;
-}
+.loadedDataTable {
+  margin-top: 36px;
 
-.fileInputOr {
-    font-size: 14px;
-    color: #999;
-    margin-bottom: 10px;
-}
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26px;
+    text-align: left;
+    color: var(--text-white);
+  }
 
-.fileInputButton {
-    font-size: 16px;
-    color: #007bff;
-    text-decoration: underline;
-    cursor: pointer;
-}
-.chooseFile{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.btn{
-    cursor: pointer;
-    padding: 15px;
-    background-color: #6B8362;
-    border-radius: 5px;
-    text-align: center;
-}
-.manageChanges{
-    display: flex;
-    justify-content: space-around;
+  .dataTable {
+    margin-top: 24px;
+  }
 }

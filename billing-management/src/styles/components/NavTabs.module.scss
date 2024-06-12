@@ -1,19 +1,11 @@
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
+nav {
+  margin-top: 50px;
+  ul {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
 
-nav ul li {
-  cursor: pointer;
-  padding: 10px 20px;
-  border: 1px solid white;
-  border-radius: 5px;
-  color: white;
-}
-
-nav ul li.active {
-  background-color: #4caf50;
+    li {
+    }
+  }
 }
