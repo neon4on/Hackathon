@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import styles from "../styles/pages/Bills.module.scss"
+import styles from "../styles/pages/Bills.module.scss";
 import Header from '../components/Header';
 import NavTabs from '../components/NavTabs';
 import MainHeading from '../components/MainHeading';
 import DataTable from '../components/DataTable';
-import AddButton from '../components/AddButton';
+import * as XLSX from 'xlsx';
 
 function App() {
   const [activeTab, setActiveTab] = useState('uploadData');
+  const [dataValues, setDataValues] = useState([]);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleTabClick = (key) => {
     setActiveTab(key);
@@ -30,38 +33,43 @@ function App() {
     { key: 'costWithoutVAT', label: 'Стоимость без НДС' },
   ];
 
-  const dataValues = [
-    {
-      accountNumber: 204,
-      accountPosition: 'Позиция 1',
-      accountYear: 2006,
-      serviceId: 'ID 012053',
-      agreementNumber: '2006-ABC',
-      accountReflectionDate: '01.06.2006',
-      serviceVolume: 'полный',
-      costWithoutVAT: 1000,
-    },
-    {
-      accountNumber: 1,
-      accountPosition: 'Позиция 2',
-      accountYear: 2009,
-      serviceId: 'ID 012785',
-      agreementNumber: '2009-BCE',
-      accountReflectionDate: '02.06.2009',
-      serviceVolume: 'полный',
-      costWithoutVAT: 5000,
-    },
-    {
-      accountNumber: 3004,
-      accountPosition: 'Позиция 3',
-      accountYear: 2013,
-      serviceId: 'ID 00855',
-      agreementNumber: '2013-C',
-      accountReflectionDate: '01.06.2013',
-      serviceVolume: 'полный',
-      costWithoutVAT: 12000,
-    },
-  ];
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleFileUpload = () => {
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const parsedData = XLSX.utils.sheet_to_json(sheet, { header: 'A' });
+
+        const formattedData = parsedData.map((row) => {
+          return {
+            accountNumber: row.A || '0',
+            accountPosition: row.B || '0',
+            accountYear: row.C || '0',
+            serviceId: row.D || '0',
+            agreementNumber: row.E || '0',
+            accountReflectionDate: row.F || '0',
+            serviceVolume: row.G || '0',
+            costWithoutVAT: row.H || '0',
+          };
+        });
+
+        setDataValues([...dataValues, ...formattedData]);
+        setUploadedFiles([...uploadedFiles, { fileName: selectedFile.name, fileWeight: `${selectedFile.size} KB` }]);
+        setSelectedFile(null);
+      };
+
+      reader.readAsArrayBuffer(selectedFile);
+    }
+  };
+
 
   const renderContent = () => {
     switch (activeTab) {
@@ -71,7 +79,7 @@ function App() {
             <div className={styles.uploadData}>
               <div className={styles.chooseFile}>
                 <div className={styles.fileInputWrapper}>
-                  <input type="file" id="fileInput" className={styles.fileInput} />
+                  <input type="file" id="fileInput" className={styles.fileInput} onChange={handleFileSelect} />
                   <label htmlFor="fileInput" className={styles.fileInputLabel}>
                     <div className={styles.fileInputContent}>
                       <span className={styles.fileInputText}>Переместите файл сюда</span>
@@ -82,33 +90,12 @@ function App() {
                     </div>
                   </label>
                 </div>
-                <div className={styles.btn}>Загрзуить файл</div>
+                <div className={styles.btn} onClick={handleFileUpload}>Загрузить файл</div>
               </div>
               <div className="uploadedFiles">
                 <MainHeading text="Загруженные файлы" />
                 <DataTable
-                  data={[
-                    {
-                      fileName: 'Счет1',
-                      fileWeight: '32Кб'
-                    },
-                    {
-                      fileName: 'Счет1',
-                      fileWeight: '32Кб'
-                    },
-                    {
-                      fileName: 'Счет1',
-                      fileWeight: '32Кб'
-                    },
-                    {
-                      fileName: 'Счет1',
-                      fileWeight: '32Кб'
-                    },
-                    {
-                      fileName: 'Счет1',
-                      fileWeight: '32Кб'
-                    },
-                  ]}
+                  data={uploadedFiles}
                   columns={[
                     {
                       key: 'fileName', label: 'Имя файла'
