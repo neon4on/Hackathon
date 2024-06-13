@@ -12,13 +12,13 @@ const NavTabs = ({ tabs, onTabClick }) => {
   };
 
   return (
-    <nav>
-      <ul>
+    <nav className={styles.nav}>
+      <ul className={styles.ul}>
         {tabs.map((tab) => (
           <li
             key={tab.key}
             onClick={() => handleTabClick(tab.key)}
-            className={cn({ [styles.active]: activeTab === tab.key })}
+            className={cn(styles.li, { [styles.active]: activeTab === tab.key })}
           >
             {tab.label}
           </li>
