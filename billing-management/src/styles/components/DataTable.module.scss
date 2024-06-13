@@ -1,23 +1,50 @@
+@import "../globals.scss";
+
 .dataTable {
-  margin-bottom: 20px;
-  overflow-x: auto;
-  max-width: 1280px;
+  max-width: 1540px;
+  border-radius: 20px;
+  background: var(--dashboard-column);
+  padding: 20px;
+  .dataTableOverflow {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    overflow-x: auto;
+    @include scrollbar;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
-
+    border: none;
+    thead {
+      border-bottom: 1px solid var(--divider-bold);
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--divider-thin);
+      }
+    }
     th,
     td {
-      padding: 10px;
-      border: 1px solid #405040;
+      min-width: 124px;
+      padding: 4px 0 8px;
     }
 
     th {
-      background-color: #304030;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 22.1px;
+      text-align: left;
+      color: var(--text-title17);
     }
 
     td {
-      background-color: #203020;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 22.1px;
+      text-align: left;
+      color: var(--text-secondary);
     }
   }
 }

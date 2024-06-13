@@ -32,18 +32,19 @@
   &::-webkit-scrollbar {
     display: block;
     width: 6px;
-    height: 14px;
+    height: 10px;
     border: none;
   }
   &::-webkit-scrollbar-thumb {
     display: block;
     width: 4px;
-    background-color: var(--text-secondary);
-    border-radius: 5px;
+    // background-color: var(--text-secondary);
+    border: 1px solid var(--text-secondary);
+    border-radius: 12px;
   }
   &::-webkit-scrollbar-track {
-    border-radius: 5px;
-    border: 1px solid var(--text-secondary);
+    border-radius: 12px;
+    background: var(--dashboard-backgr);
   }
   &::-webkit-scrollbar-button {
     display: none;

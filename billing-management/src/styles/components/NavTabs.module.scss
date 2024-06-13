@@ -1,19 +1,22 @@
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
+nav {
+  margin-top: 50px;
+  ul {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    gap: 20px;
 
-nav ul li {
-  cursor: pointer;
-  padding: 10px 20px;
-  border: 1px solid white;
-  border-radius: 5px;
-  color: white;
-}
-
-nav ul li.active {
-  background-color: #4caf50;
+    li {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 31.2px;
+      text-align: left;
+      color: var(--text-secondary);
+      cursor: pointer;
+      &.active,
+      &:hover {
+        color: var(--text-secondary-light);
+      }
+    }
+  }
 }
