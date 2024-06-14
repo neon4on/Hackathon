@@ -42,41 +42,31 @@ const AppContent = () => {
           <Route
             path='/bills'
             element={
-              <ProtectedRoute>
                 <Bills />
-              </ProtectedRoute>
             }
           />
           <Route
             path='/objectdistributionpage'
             element={
-              <ProtectedRoute>
                 <ObjectDistributionPage />
-              </ProtectedRoute>
             }
           />
           <Route
             path='/DistributionManagement'
             element={
-              <ProtectedRoute>
                 <DistributionManagement />
-              </ProtectedRoute>
             }
           />
           <Route
             path='/distributedpaymentinvoices'
             element={
-              <ProtectedRoute>
                 <DistributedPaymentInvoices />
-              </ProtectedRoute>
             }
           />
           <Route
             path='/forecast'
             element={
-              <ProtectedRoute>
                 <Forecast />
-              </ProtectedRoute>
             }
           />
         </Route>

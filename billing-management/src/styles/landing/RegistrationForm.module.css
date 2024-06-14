@@ -3,6 +3,7 @@
   }
   
   .registrationForm h2 {
+    color: #000;
     font-size: 20px;
     margin-bottom: 20px;
   }
@@ -22,6 +23,7 @@
   }
   
   .registrationForm button {
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     color: white;
