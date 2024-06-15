@@ -50,7 +50,7 @@ const navLinks = [
 const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
-      <h1 className={styles.title}>Имя</h1>
+      <h1 className={styles.title}>Blood Blade</h1>
       {navLinks.map((link) => (
         <NavLink
           className={({ isActive }) => [isActive ? styles.activeLink : "", styles.link].join(" ")}
