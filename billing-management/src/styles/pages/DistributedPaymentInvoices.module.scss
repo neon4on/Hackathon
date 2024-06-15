@@ -1,78 +1,172 @@
+@import "../globals.scss";
+
 .mainContent {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: #203020;
   color: #fff;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-top: 50px;
 
   select {
-    background-color: #304030;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    margin-right: 10px;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22.1px;
+    text-align: left;
+    color: var(--text-secondary-light);
+    background: var(--dashboard-column);
+    height: 36px;
+    border-radius: 17px;
+    border: 1px solid var(--text-secondary-light);
+
+    &:nth-child(1) {
+      width: 240px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      width: 370px;
+    }
   }
 }
 
 .dataTable {
-  margin-bottom: 20px;
-  overflow-x: auto;
+  max-width: 1540px;
+  border-radius: 20px;
+  background: var(--dashboard-column);
+  padding: 20px;
+  margin-top: 40px;
+  .dataTableOverflow {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    overflow-x: auto;
+    @include scrollbar;
+  }
 
   table {
     width: 100%;
     border-collapse: collapse;
-
+    border: none;
+    thead {
+      border-bottom: 1px solid var(--divider-bold);
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--divider-thin);
+      }
+    }
     th,
     td {
-      padding: 10px;
-      border: 1px solid #405040;
+      min-width: 124px;
+      padding: 4px 0 8px;
     }
 
     th {
-      background-color: #304030;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 22.1px;
+      text-align: left;
+      color: var(--text-title17);
     }
 
     td {
-      background-color: #203020;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 22.1px;
+      text-align: left;
+      color: var(--text-secondary);
     }
   }
 }
 
 .exportSection {
+  margin-top: 20px;
   button {
     background-color: #008000;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    margin-bottom: 10px;
   }
 
   .exportOptions {
     display: flex;
     flex-direction: column;
-
-    input[type='radio'] {
-      margin: 10px 0;
+    gap: 20px;
+    background: var(--dashboard-column);
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 20px;
+    width: 370px;
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 26px;
+      text-align: left;
+      color: var(--text-white);
     }
 
-    input[type='text'] {
-      margin: 10px 0;
-      padding: 10px;
-      background-color: #304030;
+    .radio {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+      span {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 16.9px;
+        text-align: left;
+        color: var(--text-secondary-light);
+      }
+      input {
+        appearance: none;
+
+        & + span {
+          color: var(--text-secondary);
+        }
+        &:checked + span {
+          color: var(--text-secondary-light);
+        }
+      }
+    }
+
+    .text {
+      margin-top: 10px;
+      span {
+        color: var(--text-secondary-light);
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 16.9px;
+        text-align: left;
+        &:not(&:first-child) {
+          margin-left: 12px;
+        }
+      }
+    }
+
+    input[type="text"] {
+      margin-left: 7px;
+      background-color: transparent;
+      border: none;
+      outline: none;
       color: #fff;
       border: none;
+      width: 127px;
     }
 
     button {
+      width: 330px;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 19.5px;
+      text-align: center;
       background-color: #008000;
-      color: #fff;
+      color: var(--text-white);
       border: none;
       padding: 10px 20px;
       cursor: pointer;
