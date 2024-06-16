@@ -1,41 +1,45 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // Импортируем пакет cors
+const cors = require('cors');
 const billRoutes = require('./routes/bill');
 const distributionObjectRoutes = require('./routes/distributionObject');
 const forecastRoutes = require('./routes/forecast');
-const mlRoutes = require('./routes/ml'); // Импортируем маршруты для ML
 const { exec } = require('child_process');
 const path = require('path');
 const authRoutes = require('./routes/auth');
 const passwordResetRoutes = require('./routes/passwordReset');
-const pool = require('./config/db');
 const app = express();
+const { axios } = require('axios');
 
-app.use(cors()); // Используем cors
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/bills', billRoutes);
 app.use('/api/distribution-objects', distributionObjectRoutes);
 app.use('/api/forecast', forecastRoutes);
-// app.use('/api/ml', mlRoutes); // Добавляем маршруты для ML
 app.use('/api/auth', authRoutes);
 app.use('/api/password-reset', passwordResetRoutes);
-app.post('/api/ml', (req, res) => {
-  const scriptPath = path.join(__dirname, 'ml', 'process.py');
-  exec(`python ${scriptPath}`, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error executing script: ${error.message}`);
-      return res.status(500).json({ error: 'Error executing script' });
+
+app.get('/api/files', (req, res) => {
+  const filesPath = path.join(__dirname, 'ml');
+  fs.readdir(filesPath, (err, files) => {
+    if (err) {
+      return res.status(500).send('Не удалось получить список файлов');
     }
-    if (stderr) {
-      console.error(`Script stderr: ${stderr}`);
-      return res.status(500).json({ error: 'Script error' });
-    }
-    res.json(JSON.parse(stdout));
+    res.json(files);
   });
 });
 
+// Маршрут для скачивания файла
+app.get('/api/download/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, 'ml', filename);
+  res.download(filePath, (err) => {
+    if (err) {
+      res.status(500).send('Ошибка при скачивании файла.');
+    }
+  });
+});
 const port = 3000;
 
 app.listen(port, () => {
