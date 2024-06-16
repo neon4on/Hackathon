@@ -1,4 +1,4 @@
-@import "../globals.scss";
+@import '../globals.scss';
 
 .mainContent {
   .header {
@@ -7,7 +7,7 @@
     align-items: center;
   }
   .dateInput {
-    input {
+    select {
       width: 200px;
       height: 50px;
       background: #2a4d34;
@@ -21,6 +21,7 @@
       padding: 0 10px;
     }
   }
+
   .select {
     appearance: none;
     width: 250px;
@@ -40,7 +41,7 @@
     height: 50px;
     position: relative;
     &::before {
-      content: url("../../../public/icons/search.svg");
+      content: url('../../../public/icons/search.svg');
       position: absolute;
       top: 50%;
       left: 20px;

@@ -1,40 +1,33 @@
-// DistributedPaymentInvoices.jsx
-import React, { useEffect, useState } from "react";
-import Header from "src/components/Header";
-import styles from "../styles/pages/DistributedPaymentInvoices.module.scss";
-
-import moment from "moment";
+import React, { useState } from 'react';
+import Header from 'src/components/Header';
+import styles from '../styles/pages/DistributedPaymentInvoices.module.scss';
+import moment from 'moment';
 
 const DistributedPaymentInvoices = () => {
   const files = [
-    { name: "Прогнозируемые Счета на оплату 3800-2023_part1.csv", date: new Date() },
-    { name: "Прогнозируемые Счета на оплату 4200-4000-3800-2024_part1.csv", date: new Date() },
-    { name: "Прогнозируемые Счета на оплату 5400-2023_part1.csv", date: new Date() },
-    { name: "Прогнозируемые Счета на оплату 5400-2024_part1.csv", date: new Date() },
-    { name: "Прогнозируемые Счета на оплату 5500-2023_part1.csv", date: new Date() },
-    { name: "Распределённые Счета на оплату 3800-2023_part1.csv", date: new Date() },
-    { name: "Распределённые Счета на оплату 4200-4000-3800-2024_part1.csv", date: new Date() },
-    { name: "Распределённые Счета на оплату 4200-4000-3800-2024_part2.csv", date: new Date() },
-    { name: "Распределённые Счета на оплату 4200-4000-3800-2024_part3.csv", date: new Date() },
-    { name: "Распределённые Счета на оплату 5400-2023_part1.csv", date: new Date() },
-    { name: "Распределённые Счета на оплату 5400-2024_part1.csv", date: new Date() },
-    { name: "Распределённые Счета на оплату 5500-2023_part1.csv", date: new Date() },
+    { name: 'Прогнозируемые Счета на оплату 3800-2023_part1.csv', date: new Date() },
+    { name: 'Прогнозируемые Счета на оплату 4200-4000-3800-2024_part1.csv', date: new Date() },
+    { name: 'Прогнозируемые Счета на оплату 5400-2023_part1.csv', date: new Date() },
+    { name: 'Прогнозируемые Счета на оплату 5400-2024_part1.csv', date: new Date() },
+    { name: 'Прогнозируемые Счета на оплату 5500-2023_part1.csv', date: new Date() },
+    { name: 'Распределённые Счета на оплату 3800-2023_part1.csv', date: new Date() },
+    { name: 'Распределённые Счета на оплату 4200-4000-3800-2024_part1.csv', date: new Date() },
+    { name: 'Распределённые Счета на оплату 4200-4000-3800-2024_part2.csv', date: new Date() },
+    { name: 'Распределённые Счета на оплату 4200-4000-3800-2024_part3.csv', date: new Date() },
+    { name: 'Распределённые Счета на оплату 5400-2023_part1.csv', date: new Date() },
+    { name: 'Распределённые Счета на оплату 5400-2024_part1.csv', date: new Date() },
+    { name: 'Распределённые Счета на оплату 5500-2023_part1.csv', date: new Date() },
   ];
 
-  const downloadFile = (filename) => {
-    window.location.href = `/files/${filename}`;
-  };
-
-  const [search, setSearch] = useState("");
-  const [select, setSelect] = useState("Все");
-  const [year, setYear] = useState(2024);
+  const [search, setSearch] = useState('');
+  const [select, setSelect] = useState('Все');
+  const [year, setYear] = useState('');
 
   const onSearchChange = (e) => {
     setSearch(e.target.value);
   };
 
   const onSelectChange = (e) => {
-    setSearch("");
     setSelect(e.target.value);
   };
 
@@ -43,48 +36,49 @@ const DistributedPaymentInvoices = () => {
   };
 
   const searchFilter = (file) => {
-    if (search === "") return true;
-    if (!file.name.toLowerCase().includes(search.toLowerCase())) return false;
-
-    return true;
+    if (!search) return true;
+    return file.name.toLowerCase().includes(search.toLowerCase());
   };
 
   const selectFilter = (file) => {
-    if (select === "Все") return true;
-    if (!file.name.toLowerCase().includes(select.toLowerCase())) return false;
-
-    return true;
+    if (select === 'Все') return true;
+    return file.name.toLowerCase().includes(select.toLowerCase());
   };
 
   const dateFilter = (file) => {
-    if (year === "") return true;
-
-    return file.date.getFullYear() === Number(year);
+    if (!year) return true;
+    return file.name.includes(year);
   };
+
+  const downloadFile = (filename) => {
+    const link = document.createElement('a');
+    link.href = `/files/${filename}`;
+    link.download = filename;
+    link.click();
+  };
+
+  const filteredFiles = files.filter(searchFilter).filter(selectFilter).filter(dateFilter);
 
   return (
     <div className={styles.mainContent}>
       <div className={styles.header}>
-        <Header title='Распределенные счета на оплату' />
+        <Header title="Распределенные счета на оплату" />
         <label className={styles.dateInput}>
-          <input
-            type='number'
-            min='1900'
-            max='2099'
-            step='1'
-            value={year}
-            onChange={onYearChange}
-          />
+          <select value={year} onChange={onYearChange}>
+            <option value="">Все годы</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+          </select>
         </label>
         <select className={styles.select} onChange={onSelectChange}>
-          <option value='Распределённые'>Распределенные</option>
-          <option value='Прогнозируемые'>Прогнозируемые</option>
-          <option value='Все'>Все</option>
+          <option value="Все">Все</option>
+          <option value="Распределённые">Распределенные</option>
+          <option value="Прогнозируемые">Прогнозируемые</option>
         </select>
         <label className={styles.search}>
           <input
-            type='text'
-            placeholder='Введите название'
+            type="text"
+            placeholder="Введите название"
             value={search}
             onChange={onSearchChange}
           />
@@ -92,18 +86,17 @@ const DistributedPaymentInvoices = () => {
       </div>
 
       <div className={styles.exportSection}>
-        {files.length > 0 ? (
-          files
-            .filter(selectFilter)
-            .filter(searchFilter)
-            .filter(dateFilter)
-            .map((file, index) => (
-              <div key={index} className={styles.exportOptions} onClick={() => downloadFile(file)}>
-                <img className={styles.downloadIcon} src='icons/download.svg' />
-                <span className={styles.date}>{moment(file.date).format("hh:mm DD.MM.YYYY")}</span>
-                <h3 className={styles.file}>{file.name}</h3>
-              </div>
-            ))
+        {filteredFiles.length > 0 ? (
+          filteredFiles.map((file, index) => (
+            <div
+              key={index}
+              className={styles.exportOptions}
+              onClick={() => downloadFile(file.name)}>
+              <img className={styles.downloadIcon} src="icons/download.svg" alt="Download Icon" />
+              <span className={styles.date}>{moment(file.date).format('HH:mm DD.MM.YYYY')}</span>
+              <h3 className={styles.file}>{file.name}</h3>
+            </div>
+          ))
         ) : (
           <p>Файлы не найдены</p>
         )}
