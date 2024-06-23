@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
+import { observer } from "mobx-react";
 
 import Sidebar from "./Sidebar";
 
-const Layout = () => {
+const Layout = observer(() => {
   return (
     <>
       <Sidebar />
@@ -13,6 +14,6 @@ const Layout = () => {
       </div>
     </>
   );
-};
+});
 
 export default Layout;
