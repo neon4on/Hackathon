@@ -23,7 +23,6 @@ def determine_general_ledger_account(row):
         row['Признак "Способ использования"'],
         row['Площадь']
     )
-    # Используем хэширование для создания уникального 10-значного числа
     return abs(hash(unique_identifier)) % (10**10)
 
 def convert_date(date):
@@ -46,7 +45,7 @@ def distribute_to_buildings(bills, buildings, contract_building_relation, servic
     
     distributed_data = []
 
-    for _, bill in bills.iterrows():
+    for index, bill in bills.iterrows():
         total_amount = bill['Стоимость без НДС']
         relevant_buildings = buildings[buildings['Здание'].isin(contract_building_relation[contract_building_relation['ID договора'] == bill['ID договора']]['ID здания'])]
         total_area = relevant_buildings['Площадь'].sum()
@@ -90,6 +89,8 @@ def distribute_to_buildings(bills, buildings, contract_building_relation, servic
     
     print("Распределение по зданиям завершено.")
     return distributed_df
+    print("Распределение по зданиям завершено.")
+    return pd.DataFrame(distributed_data)
 
 def distribute_to_assets(distributed_data, assets):
     print("Начало распределения по основным средствам.")
