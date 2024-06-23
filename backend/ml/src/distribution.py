@@ -2,7 +2,9 @@ import pandas as pd
 
 def load_service_code_mapping(service_codes):
     # Создание маппинга "ID услуги" -> "Класс услуги"
+    print("Создание маппинга кодов услуг.")
     service_to_class = dict(zip(service_codes['ID услуги'], service_codes['Класс услуги']))
+    print("Маппинг кодов услуг успешно создан.")
     return service_to_class
 
 def determine_general_ledger_account(row):
@@ -25,7 +27,7 @@ def determine_general_ledger_account(row):
     return abs(hash(unique_identifier)) % (10**10)
 
 def convert_date(date):
-    if pd.isna(date):
+    if pd.isna(date) or date == '':
         return None
     if isinstance(date, (int, float)) and len(str(int(date))) == 5:
         return (pd.to_datetime('1899-12-30') + pd.to_timedelta(int(date), unit='D')).date()
@@ -36,7 +38,11 @@ def convert_date(date):
     return date
 
 def distribute_to_buildings(bills, buildings, contract_building_relation, service_to_class):
+    print("Начало распределения по зданиям.")
     buildings['Площадь'] = buildings['Площадь'].astype(str).str.replace(',', '.').astype(float)
+    
+    # Преобразование 'Стоимость без НДС' в числовой тип
+    bills['Стоимость без НДС'] = pd.to_numeric(bills['Стоимость без НДС'], errors='coerce')
     
     distributed_data = []
 
@@ -75,13 +81,18 @@ def distribute_to_buildings(bills, buildings, contract_building_relation, servic
                 'Признак "Способ использования"': None,
                 'Площадь': building['Площадь'],
                 'Сумма распределения': allocation,
-                'Счет главной книги': None  # Это значение будет обновлено позже
+                'Счет главной книги': None
             })
             position_counter += 1
     
-    return pd.DataFrame(distributed_data)
+    distributed_df = pd.DataFrame(distributed_data)
+    print(f"Распределённые данные: {distributed_df[['Номер счета', 'Сумма распределения']].head()}")
+    
+    print("Распределение по зданиям завершено.")
+    return distributed_df
 
 def distribute_to_assets(distributed_data, assets):
+    print("Начало распределения по основным средствам.")
     final_data = []
 
     for _, row in distributed_data.iterrows():
@@ -108,11 +119,12 @@ def distribute_to_assets(distributed_data, assets):
                 'ID основного средства': str(asset['ID основного средства']),
                 'Признак "Использование в основной деятельности"': asset['Признак "Используется в основной деятельности"'],
                 'Признак "Способ использования"': asset['Признак "Способ использования"'],
-                'Счет главной книги': None  # Это значение будет обновлено позже
+                'Счет главной книги': None
             })
             final_data.append(new_row)
     
     final_df = pd.DataFrame(final_data)
     final_df['Счет главной книги'] = final_df.apply(determine_general_ledger_account, axis=1)
     
+    print("Распределение по основным средствам завершено.")
     return final_df

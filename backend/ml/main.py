@@ -1,8 +1,11 @@
+import sys 
+print(sys.prefix, sys.base_prefix)
 from src.data_processing import load_data, save_data
 from src.distribution import distribute_to_buildings, distribute_to_assets, load_service_code_mapping
 from src.forecasting import forecast_costs
 import os
 
+print('HI')
 # Загрузка данных
 buildings_area_data, contracts_data, contract_building_relation_data, assets_data, bills_data, service_codes_data = load_data()
 
