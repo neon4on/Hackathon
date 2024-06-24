@@ -9,4 +9,13 @@
     margin-bottom: 10px;
     color: #fff3f3;
   }
+
+  .closeEditButtons {
+    display: flex;
+    gap: 20px;
+
+    button {
+      width: 200px;
+    }
+  }
 }

@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  buildingsTable,
+  assetsTable,
+  servicesTable,
+  contractsTable,
+  columns,
+} from "../lib/objectDistributionTables";
 import { observer } from "mobx-react";
 
 import Header from "../components/Header";
@@ -11,461 +18,97 @@ import cn from "classnames";
 
 import styles from "src/styles/pages/ObjectDistributionPage.module.scss";
 
+const tabs = [
+  { key: "buildings", label: "Справочник зданий" },
+  { key: "assets", label: "Справочник основных средств" },
+  { key: "services", label: "Справочник работ/услуг" },
+  { key: "contracts", label: "Справочник договоров" },
+];
+
 const App = observer(function () {
   const [activeTab, setActiveTab] = useState("buildings");
+  const [editMoode, setEditMode] = useState(false);
+  const [data, setData] = useState([...buildingsTable]);
+
+  const openEdit = () => setEditMode(true);
+  const closeEdit = () => setEditMode(false);
 
   const handleTabClick = (key) => {
     setActiveTab(key);
   };
 
-  const tabs = [
-    { key: "buildings", label: "Справочник зданий" },
-    { key: "assets", label: "Справочник основных средств" },
-    { key: "services", label: "Справочник работ/услуг" },
-    { key: "contracts", label: "Справочник договоров" },
-  ];
+  useEffect(() => {
+    if (activeTab === "buildings") {
+      setData(buildingsTable);
+    }
+    if (activeTab === "assets") {
+      setData(assetsTable);
+    }
+    if (activeTab === "services") {
+      setData(servicesTable);
+    }
+    if (activeTab === "contracts") {
+      setData(contractsTable);
+    }
 
-  const columns = [
-    { key: "id", label: "ID здания" },
-    { key: "startYear", label: "Начало владения" },
-    { key: "endYear", label: "Конец владения" },
-    { key: "measurementEnd", label: "Конец действия измерения" },
-    { key: "measurementStart", label: "Начало действия измерения" },
-    { key: "areaUnit", label: "Единица измерения площади" },
-  ];
-
-  const data = [
-    {
-      id: 205,
-      startYear: 1995,
-      endYear: 1996,
-      measurementEnd: "см.файл",
-      measurementStart: "см.файл",
-      areaUnit: "кв.метр",
-    },
-    {
-      id: 100,
-      startYear: 1999,
-      endYear: 1996,
-      measurementEnd: "см.файл",
-      measurementStart: "см.файл",
-      areaUnit: "кв.метр",
-    },
-    {
-      id: 1006,
-      startYear: 1998,
-      endYear: 1996,
-      measurementEnd: "см.файл",
-      measurementStart: "см.файл",
-      areaUnit: "кв.метр",
-    },
-  ];
+    setEditMode(false);
+  }, [activeTab]);
 
   const renderContent = () => {
     switch (activeTab) {
       case "buildings":
         return (
           <>
-            <h2>Массив данных 1. Таблица</h2>
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
-            <AddButton
-              label='Добавить средство'
-              onClick={() => console.log("Add button clicked")}
-            />
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
-            <h2>Массив данных 2. Таблица</h2>
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
-            <AddButton
-              label='Добавить средство'
-              onClick={() => console.log("Add button clicked")}
-            />
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
+            {editMoode === false ? (
+              <AddButton label='Редактировать' onClick={openEdit} />
+            ) : (
+              <div className={styles.closeEditButtons}>
+                <AddButton label='Сохранить' onClick={closeEdit} />
+              </div>
+            )}
+            <DataTable data={data} setData={setData} columns={columns} edit={editMoode} />
           </>
         );
+
       case "assets":
         return (
           <>
-            <h2>Таблица</h2>
-            <DataTable
-              data={[
-                {
-                  id: 1000,
-                  startYear: 2000,
-                  endYear: 56,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
-            <AddButton
-              label='Добавить средство'
-              onClick={() => console.log("Add button clicked")}
-            />
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
+            {editMoode === false ? (
+              <AddButton label='Редактировать' onClick={openEdit} />
+            ) : (
+              <div className={styles.closeEditButtons}>
+                <AddButton label='Сохранить' onClick={closeEdit} />
+              </div>
+            )}
+            <DataTable data={data} setData={setData} columns={columns} edit={editMoode} />
           </>
         );
+
       case "services":
         return (
           <>
-            <h2>Таблица</h2>
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
-            <AddButton
-              label='Добавить средство'
-              onClick={() => console.log("Add button clicked")}
-            />
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
+            {editMoode === false ? (
+              <AddButton label='Редактировать' onClick={openEdit} />
+            ) : (
+              <div className={styles.closeEditButtons}>
+                <AddButton label='Сохранить' onClick={closeEdit} />
+              </div>
+            )}
+            <DataTable data={data} setData={setData} columns={columns} edit={editMoode} />
           </>
         );
+
       case "contracts":
         return (
           <>
-            <h2>Таблица</h2>
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
-            <AddButton
-              label='Добавить средство'
-              onClick={() => console.log("Add button clicked")}
-            />
-            <DataTable
-              data={[
-                {
-                  id: 205,
-                  startYear: 1995,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 100,
-                  startYear: 1999,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-                {
-                  id: 1006,
-                  startYear: 1998,
-                  endYear: 1996,
-                  measurementEnd: "см.файл",
-                  measurementStart: "см.файл",
-                  areaUnit: "кв.метр",
-                },
-              ]}
-              columns={[
-                { key: "id", label: "ID здания" },
-                { key: "startYear", label: "Начало владения" },
-                { key: "endYear", label: "Конец владения" },
-                { key: "measurementEnd", label: "Конец действия измерения" },
-                { key: "measurementStart", label: "Начало действия измерения" },
-                { key: "areaUnit", label: "Единица измерения площади" },
-              ]}
-            />
+            {editMoode === false ? (
+              <AddButton label='Редактировать' onClick={openEdit} />
+            ) : (
+              <div className={styles.closeEditButtons}>
+                <AddButton label='Сохранить' onClick={closeEdit} />
+              </div>
+            )}
+            <DataTable data={data} setData={setData} columns={columns} edit={editMoode} />
           </>
         );
       default:

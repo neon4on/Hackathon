@@ -46,5 +46,76 @@
       text-align: left;
       color: var(--text-secondary);
     }
+
+    .addRow {
+      span {
+        color: var(--text-secondary);
+      }
+
+      &:hover {
+        span {
+          color: var(--text-title17);
+        }
+      }
+    }
+  }
+
+  button {
+    border: none;
+    background: none;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+  }
+}
+
+.editableTable {
+  padding-bottom: 0;
+  tbody {
+    tr:last-child {
+      border-bottom: none;
+    }
+    td:first-child {
+      width: 180px;
+    }
+
+    td:last-child {
+      width: 50px;
+      min-width: unset;
+      img {
+        width: 24px;
+        height: 24px;
+        &:hover {
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+
+    button {
+      margin: 0;
+    }
+
+    input {
+      background: none;
+      border: none;
+      width: 80%;
+      height: 100%;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 22.1px;
+      text-align: left;
+      color: var(--text-secondary);
+      outline: none;
+      &:focus {
+        border: 1px solid var(--divider-thin);
+      }
+    }
   }
 }
