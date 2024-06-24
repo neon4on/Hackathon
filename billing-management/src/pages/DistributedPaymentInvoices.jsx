@@ -1,27 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from 'src/components/Header';
 import styles from '../styles/pages/DistributedPaymentInvoices.module.scss';
 import moment from 'moment';
 
 const DistributedPaymentInvoices = () => {
-  const files = [
-    { name: 'Прогнозируемые Счета на оплату 3800-2023_part1.csv', date: new Date() },
-    { name: 'Прогнозируемые Счета на оплату 4200-4000-3800-2024_part1.csv', date: new Date() },
-    { name: 'Прогнозируемые Счета на оплату 5400-2023_part1.csv', date: new Date() },
-    { name: 'Прогнозируемые Счета на оплату 5400-2024_part1.csv', date: new Date() },
-    { name: 'Прогнозируемые Счета на оплату 5500-2023_part1.csv', date: new Date() },
-    { name: 'Распределённые Счета на оплату 3800-2023_part1.csv', date: new Date() },
-    { name: 'Распределённые Счета на оплату 4200-4000-3800-2024_part1.csv', date: new Date() },
-    { name: 'Распределённые Счета на оплату 4200-4000-3800-2024_part2.csv', date: new Date() },
-    { name: 'Распределённые Счета на оплату 4200-4000-3800-2024_part3.csv', date: new Date() },
-    { name: 'Распределённые Счета на оплату 5400-2023_part1.csv', date: new Date() },
-    { name: 'Распределённые Счета на оплату 5400-2024_part1.csv', date: new Date() },
-    { name: 'Распределённые Счета на оплату 5500-2023_part1.csv', date: new Date() },
-  ];
-
+  const [files, setFiles] = useState([]);
   const [search, setSearch] = useState('');
   const [select, setSelect] = useState('Все');
   const [year, setYear] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [distributionRunning, setDistributionRunning] = useState(false);
+
+  useEffect(() => {
+    fetchFiles();
+  }, []);
+
+  const fetchFiles = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/files');
+      if (!response.ok) {
+        throw new Error('Не удалось загрузить список файлов');
+      }
+      const data = await response.json();
+      setFiles(data);
+      setLoading(false);
+    } catch (err) {
+      console.error('Ошибка при загрузке файлов:', err);
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  const runDistribution = async () => {
+    try {
+      setDistributionRunning(true);
+      const response = await fetch('/api/run-distribution', { method: 'POST' });
+      if (!response.ok) {
+        throw new Error('Ошибка при запуске распределения');
+      }
+      const data = await response.json();
+      alert(data.message);
+    } catch (err) {
+      console.error('Ошибка при запуске распределения:', err);
+      alert(err.message);
+    } finally {
+      setDistributionRunning(false);
+    }
+  };
 
   const onSearchChange = (e) => {
     setSearch(e.target.value);
@@ -52,17 +79,31 @@ const DistributedPaymentInvoices = () => {
 
   const downloadFile = (filename) => {
     const link = document.createElement('a');
-    link.href = `/files/${filename}`;
+    link.href = `/api/files/${filename}`;
     link.download = filename;
     link.click();
   };
 
   const filteredFiles = files.filter(searchFilter).filter(selectFilter).filter(dateFilter);
 
+  if (loading) {
+    return <div>Загрузка...</div>;
+  }
+
+  if (error) {
+    return <div>Ошибка: {error}</div>;
+  }
+
   return (
     <div className={styles.mainContent}>
       <div className={styles.header}>
         <Header title="Распределенные счета на оплату" />
+        <button
+          className={styles.runDistributionButton}
+          onClick={runDistribution}
+          disabled={distributionRunning}>
+          {distributionRunning ? 'Выполняется...' : 'Начать распределение'}
+        </button>
         <label className={styles.dateInput}>
           <select value={year} onChange={onYearChange}>
             <option value="">Все годы</option>
