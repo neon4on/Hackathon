@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react";
 import styles from "../styles/pages/Bills.module.scss";
 import Header from "../components/Header";
 import NavTabs from "../components/NavTabs";
@@ -6,7 +7,7 @@ import MainHeading from "../components/MainHeading";
 import DataTable from "../components/DataTable";
 import * as XLSX from "xlsx";
 
-function App() {
+const App = observer(function () {
   const [activeTab, setActiveTab] = useState("uploadData");
   const [dataValues, setDataValues] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -154,6 +155,6 @@ function App() {
       {renderContent()}
     </div>
   );
-}
+});
 
 export default App;

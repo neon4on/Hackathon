@@ -8,7 +8,7 @@
       font-weight: 600;
       line-height: 36.4px;
       text-align: left;
-      color: #ffffff;
+      color: var(--text-white) !important;
     }
     label {
       width: 536px;
@@ -30,7 +30,7 @@
         padding-left: 48px;
         font-size: 17px;
         border: 1px solid #d1d1d1;
-        background-color: #2a4d34;
+        background-color: var(--dashboard-column);
         color: var(--text-white);
         border-radius: 17px;
         &::placeholder {
@@ -74,7 +74,7 @@
           font-size: 17px;
           line-height: 22px;
           border: 1px solid #d1d1d1;
-          background-color: #2a4d34;
+          background-color: var(--dashboard-column);
           color: var(--text-white);
           border-radius: 17px;
 

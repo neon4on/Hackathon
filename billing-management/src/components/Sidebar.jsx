@@ -1,6 +1,11 @@
 import React from "react";
+import { observer } from "mobx-react";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/components/Sidebar.module.scss";
+
+import cn from "classnames";
+
+import themeStore from "src/store/themeStore";
 
 const navLinks = [
   {
@@ -47,7 +52,7 @@ const navLinks = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = observer(() => {
   return (
     <aside className={styles.sidebar}>
       <h1 className={styles.title}>Blood Blade</h1>
@@ -59,18 +64,28 @@ const Sidebar = () => {
         >
           {({ isActive }) => (
             <>
-              <img
-                src={isActive ? link.srcActive : link.src}
-                alt={link.alt}
-                className={styles.icon}
-              />
+              <img src={link.src} alt={link.alt} className={styles.icon} />
               <span>{link.name}</span>
             </>
           )}
         </NavLink>
       ))}
+      <div className={styles.theme}>
+        <div
+          className={cn(styles.switch, {
+            [styles.light]: themeStore.theme === "light",
+            [styles.dark]: themeStore.theme === "dark",
+          })}
+        ></div>
+        <button onClick={() => themeStore.setDark()}>
+          <img src='/icons/dark.svg' />
+        </button>
+        <button onClick={() => themeStore.setLight()}>
+          <img src='/icons/light.svg' />
+        </button>
+      </div>
     </aside>
   );
-};
+});
 
 export default Sidebar;
