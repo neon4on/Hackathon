@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import themeStore from "src/store/themeStore";
 import { observer } from "mobx-react";
 import * as d3 from "d3";
-import styles from "src/styles/pages/Home.module.scss";
+import styles from "../styles/pages/Home.module.scss";
 
 const Home = observer(() => {
   const [taskProgress] = useState(0);
@@ -33,8 +33,6 @@ const Home = observer(() => {
     const root = document.querySelector(":root");
     const rootStyle = root.style;
 
-    console.log();
-
     const svg = d3.select(ref.current).attr("width", 146).attr("height", 146);
 
     const g = svg.append("g").attr("transform", "translate(73, 73)");
@@ -63,7 +61,7 @@ const Home = observer(() => {
       .attr("text-anchor", "middle")
       .attr("dy", ".35em")
       .style("font-size", "24px")
-      .style("fill", themeStore.theme == "dark" ? "#FFFFFF" : "#617958")
+      .style("fill", "#E3F3E4")
       .text(`${taskProgress}%`);
   }, [taskProgress]);
 

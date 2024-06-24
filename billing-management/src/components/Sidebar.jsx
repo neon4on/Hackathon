@@ -64,11 +64,7 @@ const Sidebar = observer(() => {
         >
           {({ isActive }) => (
             <>
-              <img
-                src={isActive ? link.srcActive : link.src}
-                alt={link.alt}
-                className={styles.icon}
-              />
+              <img src={link.src} alt={link.alt} className={styles.icon} />
               <span>{link.name}</span>
             </>
           )}
