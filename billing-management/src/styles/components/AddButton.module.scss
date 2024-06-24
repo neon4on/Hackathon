@@ -3,7 +3,7 @@ button {
   height: 36px;
   padding: 6px 0;
   background-color: var(--sb-green2);
-  color: var(--text-white);
+  color: #fff3f3;
   border: none;
   border-radius: 17px;
   cursor: pointer;
@@ -11,4 +11,5 @@ button {
   font-weight: 400;
   line-height: 19.5px;
   text-align: center;
+  margin-top: 10px;
 }
