@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Observer, observer } from "mobx-react";
 import { SnackbarProvider } from "notistack";
 
 import Landing from "src/pages/Landing";
@@ -31,7 +32,7 @@ const App = () => {
   );
 };
 
-const AppContent = () => {
+const AppContent = observer(() => {
   return (
     <div className='app-container'>
       <Routes>
@@ -83,6 +84,6 @@ const AppContent = () => {
       </Routes>
     </div>
   );
-};
+});
 
 export default App;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react";
 
 import Header from "../components/Header";
 import NavTabs from "../components/NavTabs";
@@ -10,7 +11,7 @@ import cn from "classnames";
 
 import styles from "src/styles/pages/ObjectDistributionPage.module.scss";
 
-function App() {
+const App = observer(function () {
   const [activeTab, setActiveTab] = useState("buildings");
 
   const handleTabClick = (key) => {
@@ -479,6 +480,6 @@ function App() {
       {renderContent()}
     </div>
   );
-}
+});
 
 export default App;
