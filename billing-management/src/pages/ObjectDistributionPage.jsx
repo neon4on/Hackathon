@@ -6,10 +6,10 @@ import {
   contractsTable,
   columns,
 } from "../lib/objectDistributionTables";
+import { observer } from "mobx-react";
 
 import Header from "../components/Header";
 import NavTabs from "../components/NavTabs";
-import MainHeading from "../components/MainHeading";
 import DataTable from "../components/DataTable";
 import AddButton from "../components/AddButton";
 
@@ -24,7 +24,7 @@ const tabs = [
   { key: "contracts", label: "Справочник договоров" },
 ];
 
-function App() {
+const App = observer(function () {
   const [activeTab, setActiveTab] = useState("buildings");
   const [editMoode, setEditMode] = useState(false);
   const [data, setData] = useState([...buildingsTable]);
@@ -122,6 +122,6 @@ function App() {
       {renderContent()}
     </div>
   );
-}
+});
 
 export default App;

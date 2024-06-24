@@ -1,9 +1,10 @@
 import { fetchDistributionObjects, deleteDistributionObject } from "src/api/api";
+import { observer } from "mobx-react";
 import { useState, useEffect } from "react";
 
 import styles from "src/styles/pages/Objects.module.scss";
 
-const Objects = () => {
+const Objects = observer(() => {
   const [objects, setObjects] = useState([]);
 
   useEffect(() => {
@@ -62,6 +63,6 @@ const Objects = () => {
       )}
     </div>
   );
-};
+});
 
 export default Objects;
